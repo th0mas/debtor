@@ -1,0 +1,4 @@
+.vscode/
+
+# This is massive and not required for the server
+debtor/static/debtor-frontend
