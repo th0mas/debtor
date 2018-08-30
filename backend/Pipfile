@@ -8,8 +8,13 @@ flask = "*"
 flask-script = "*"
 sqlalchemy = "*"
 flask-restful = "*"
+flask-sqlalchemy = "*"
+flask-login = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
+pylint = "*"
+"flake8" = "*"
 
 [requires]
 python_version = "3.7"
