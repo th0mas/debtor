@@ -1,0 +1,11 @@
+@import '../../styles/_variables.scss';
+
+:local {
+    .userCard {
+        max-width: 300px;
+    }
+
+    .cardHeader {
+        font-family: $title-font;
+    }
+}

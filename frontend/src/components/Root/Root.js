@@ -10,10 +10,10 @@ import AppBar from '../AppBar'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: 'rgba(117, 228, 179, 1)'
+      main: 'rgba(255, 102, 102, 1)'
     },
     secondary: {
-      main: 'rgba(18, 44, 52, 1)'
+      main: 'rgba(112, 174, 110, 1)'
     }
   }
 })

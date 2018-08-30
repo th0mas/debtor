@@ -1,0 +1,56 @@
+import React from 'react'
+
+import Avatar from '@material-ui/core/Avatar'
+import Popover from '@material-ui/core/Popover'
+import UserCard from '../UserCard'
+
+import styles from './styles.scss'
+
+export class UserAvatar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { anchor: null }
+  }
+
+  handleClick = (event) => {
+    this.setState({
+      anchor: event.currentTarget,
+    })
+  }
+
+  handleClose = () => {
+    this.setState({
+      anchor: null,
+    })
+  }
+
+  render() {
+    const anchor = this.state.anchor
+    const open = Boolean(anchor)
+    return (
+      <div>
+        <Avatar aria-haspopup="true"
+          className={styles.avatar}
+          onClick={this.handleClick}
+        >t</Avatar>
+
+        <Popover
+          id="user-popper"
+          open={open}
+          onClose={this.handleClose}
+          anchorEl={anchor}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <UserCard />
+        </Popover>
+      </div>
+    )
+  }
+}

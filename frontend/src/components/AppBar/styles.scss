@@ -3,5 +3,6 @@
 :local {
     .title {
         font-family: $title-font !important;
+        flex-grow: 1;
     }
 }
