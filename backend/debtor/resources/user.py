@@ -33,8 +33,8 @@ class Users(Resource):
         args = parser.parse_args()
         user = User.query.filter_by(uuid=uuid) \
             .first_or_404()
-
-        updated_fields = set(args.iterkeys().intersection(dir(user)))
+            
+        updated_fields = (arg for arg in args if args[arg])
 
         for field in updated_fields:
             setattr(user, field, args[field])
@@ -51,10 +51,28 @@ class Users(Resource):
         db.session.add(user)
         db.session.commit()
 
+        return user
+
 
 class UsersList(Resource):
     """
     Endpoint for /users
     """
-    def post():
-        pass
+    @marshal_with(resource_fields)
+    def post(self):
+        args = parser.parse_args()
+
+        user = User(
+            args['name'],
+            args['email'],
+            args['password'],
+            args['color']
+        )
+
+        db.session.add(user)
+        db.session.commit()
+
+        return user
+    
+    def get(self):
+        return "I do work promise"

@@ -1,13 +1,14 @@
-from flask_script import Manager
-
-from debtor import app
-
-manager = Manager(app)
-
-@manager.command # Never ever do this in production
-def run():
-    app.run(debug=True, host="0.0.0.0")
+from debtor import app, db
+from debtor.core.models import User  # noqa
 
 
-if __name__ == "__main__":
-    manager.run()
+@app.cli.command('create_db')
+def create_db():
+    db.create_all()
+    print("DB Created")
+
+
+@app.cli.command('drop_db')
+def drop_db():
+    db.drop_all()
+    print("oof")
