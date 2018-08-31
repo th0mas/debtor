@@ -2,14 +2,28 @@ from flask_restful import Resource, fields, marshal_with, reqparse
 from debtor.core.models import User
 from debtor import db
 
+small_user_resource = {
+    "id": fields.Integer,
+    "name": fields.String,
+    "color": fields.String
+}
+
+small_debt_resource = {
+    "id": fields.Integer,
+    "amount": fields.Integer,
+    "creditor": fields.Nested(small_user_resource)
+}
+
 resource_fields = {
     "id": fields.Integer,
     "name": fields.String,
     "email": fields.String,
     "color": fields.String,
     "profile_img": fields.String,
-    "debts": fields.List(fields.String)  # TODO: Add Debt
+
+    "debts": fields.List(fields.Nested(small_debt_resource))
 }
+
 
 parser = reqparse.RequestParser()
 parser.add_argument("name", type=str)

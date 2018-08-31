@@ -1,22 +1,18 @@
-from flask_restful import Resource, fields, marshal_with, reqparse
+from flask_restful import Resource, fields, marshal_with, reqparse, marshal_with_field
 from sqlalchemy import desc
 from debtor.core.models import User, Debt
 from debtor import db
 
-from .user import resource_fields as user_resource
+from . import user
 
 resource_fields = {
     "id": fields.Integer,
     "time_created": fields.DateTime,
     "amount": fields.Integer,
-    "debtor": fields.Nested(user_resource),
-    "creditor": fields.Nested(user_resource),
+    "debtor": fields.Nested(user.resource_fields),
+    "creditor": fields.Nested(user.resource_fields),
     "paid": fields.Boolean
 }
-
-resource_fields_list = {
-        "debts": fields.List(fields.Nested(resource_fields))
-    }
 
 parser = reqparse.RequestParser()
 parser.add_argument("amount", type=str)
@@ -62,9 +58,9 @@ class Debts(Resource):
 
 
 class DebtList(Resource):
-    @marshal_with(resource_fields_list)
+    @marshal_with_field(fields.List(fields.Nested(resource_fields)))
     def get(self):
-        return Debt.query.order_by(desc(Debt.time_created))
+        return Debt.query.order_by(desc(Debt.time_created)).all()
 
     @marshal_with(resource_fields)
     def post(self):

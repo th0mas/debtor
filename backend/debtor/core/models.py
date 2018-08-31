@@ -81,7 +81,7 @@ class Debt(db.Model):
     creditor_id = db.Column(db.Integer, db.ForeignKey('user.id'),
                             nullable=False)
     
-    paid = db.Column(db.Boolean)
+    paid = db.Column(db.Boolean, default=False)
 
     def __init__(self, amount, debtor, creditor):
         self.amount = amount
