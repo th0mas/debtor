@@ -1,3 +1,10 @@
+"""
+Entrypoint for the app during development and accessed through the
+`flask` command.
+
+In addition to the build in `flask run` command, additional commands
+for managing the apps are registered here.
+"""
 from debtor import app, db
 from debtor.core.models import User  # noqa
 

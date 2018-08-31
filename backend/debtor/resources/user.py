@@ -3,7 +3,7 @@ from debtor.core.models import User
 from debtor import db
 
 resource_fields = {
-    "uuid": fields.Integer,
+    "id": fields.Integer,
     "name": fields.String,
     "email": fields.String,
     "color": fields.String,
@@ -21,19 +21,19 @@ parser.add_argument("password", type=str)
 
 class Users(Resource):
     """
-    Endpoint for /user/:uuid
+    Endpoint for /user/:id
     """
     @marshal_with(resource_fields)
-    def get(self, uuid):
-        return User.query.filter_by(uuid=uuid) \
+    def get(self, id):
+        return User.query.filter_by(id=id) \
             .first_or_404()
 
     @marshal_with(resource_fields)
-    def put(self, uuid):
+    def put(self, id):
         args = parser.parse_args()
-        user = User.query.filter_by(uuid=uuid) \
+        user = User.query.filter_by(id=id) \
             .first_or_404()
-            
+
         updated_fields = (arg for arg in args if args[arg])
 
         for field in updated_fields:
@@ -43,8 +43,8 @@ class Users(Resource):
 
         return user
 
-    def delete(self, uuid):
-        user = User.query.filter_by(uuid=uuid) \
+    def delete(self, id):
+        user = User.query.filter_by(id=id) \
             .first_or_404()
         user.delete()
 
@@ -73,6 +73,6 @@ class UsersList(Resource):
         db.session.commit()
 
         return user
-    
+
     def get(self):
         return "I do work promise"
