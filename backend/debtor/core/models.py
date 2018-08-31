@@ -82,3 +82,8 @@ class Debt(db.Model):
                             nullable=False)
     
     paid = db.Column(db.Boolean)
+
+    def __init__(self, amount, debtor, creditor):
+        self.amount = amount
+        self.debtor = debtor
+        self.creditor = creditor
