@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux'
 
+import { accountReducer } from '../services/accounts/reducer'
 import {DropUIReducer} from '../services/DropUI/reducer'
+
+const makeEnitiesReducer = () => {
+  return combineReducers({
+    // debts: DebtReducer,
+    accounts: accountReducer,
+  })
+}
 
 const makeRootReducer = () => {
   // const entitiesReducer = combineReducers({})
@@ -9,7 +17,7 @@ const makeRootReducer = () => {
   })
 
   return combineReducers({
-    // entities: entitiesReducer,
+    entities: makeEnitiesReducer(),
     ui: uiReducer
   })
 }
