@@ -9,6 +9,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 # Create the base Flask object using local namespace.
 app: Flask = Flask(__name__)
@@ -44,3 +45,7 @@ def load_user(user_id):
 # later or want to add other modules to the app.
 from .core.routes import api_v1_blueprint  # noqa
 app.register_blueprint(api_v1_blueprint)
+
+# We then make sure we set CORS correctly using flask-cors
+# to allow our api to be accessed
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})

@@ -1,5 +1,7 @@
+const BASE_URL = 'http://localhost:5000/api/v1'
+
 export const checkStatus = (response) => {
-  if (response.status >= 200 && response.status > 300)
+  if (response.status >= 200 && response.status < 300)
     return response
   else {
     // Make sure we throw errors in the correct place
@@ -10,21 +12,21 @@ export const checkStatus = (response) => {
 }
 
 export const getList = (endpoint) => {
-  let url = `/${endpoint}/`
+  let url = `${BASE_URL}/${endpoint}/`
   return fetch(url)
     .then(checkStatus)
     .then((response) => response.json())
 }
 
 export const getItem = (endpoint, id) => {
-  let url =`/${endpoint}/${id}/`
+  let url =`${BASE_URL}/${endpoint}/${id}/`
   return fetch(url)
     .then(checkStatus)
     .then((response) => response.json())
 }
 
 export const put = (endpoint, payload) => {
-  let url = `/${endpoint}/${payload.id}/`
+  let url = `${BASE_URL}/${endpoint}/${payload.id}/`
   return fetch(url, {
     method: 'PUT',
     body: JSON.stringify(payload)
@@ -34,7 +36,7 @@ export const put = (endpoint, payload) => {
 }
 
 export const post = (endpoint, payload) => {
-  let url = `/${endpoint}/`
+  let url = `${BASE_URL}/${endpoint}/`
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(payload)
@@ -44,7 +46,7 @@ export const post = (endpoint, payload) => {
 }
 
 export const del = (endpoint, id) => {
-  let url = `/${endpoint}/${id}/`
+  let url = `${BASE_URL}/${endpoint}/${id}/`
   return fetch(url, {
     method: 'DELETE',
   })

@@ -1,17 +1,18 @@
 import { combineReducers } from 'redux'
 
-import { accountReducer } from '../services/accounts/reducer'
+import { accountReducer, currentUserReducer } from '../services/accounts/reducer'
+import { debtReducer } from '../services/debts/reducer'
 import {DropUIReducer} from '../services/DropUI/reducer'
 
 const makeEnitiesReducer = () => {
   return combineReducers({
-    // debts: DebtReducer,
+    debts: debtReducer,
     accounts: accountReducer,
+    currentUser: currentUserReducer
   })
 }
 
 const makeRootReducer = () => {
-  // const entitiesReducer = combineReducers({})
   const uiReducer = combineReducers({
     drop: DropUIReducer
   })

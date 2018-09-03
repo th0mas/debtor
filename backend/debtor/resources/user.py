@@ -1,17 +1,10 @@
-from flask_restful import Resource, fields, marshal_with, reqparse
+from flask_restful import Resource, fields, marshal_with, reqparse, marshal_with_field
+from sqlalchemy import desc
 from debtor.core.models import User
 from debtor import db
 
-small_user_resource = {
+nested_debt_id = {
     "id": fields.Integer,
-    "name": fields.String,
-    "color": fields.String
-}
-
-small_debt_resource = {
-    "id": fields.Integer,
-    "amount": fields.Integer,
-    "creditor": fields.Nested(small_user_resource)
 }
 
 resource_fields = {
@@ -21,7 +14,7 @@ resource_fields = {
     "color": fields.String,
     "profile_img": fields.String,
 
-    "debts": fields.List(fields.Nested(small_debt_resource))
+    "debts": fields.List(fields.Nested(nested_debt_id))
 }
 
 
@@ -88,5 +81,6 @@ class UsersList(Resource):
 
         return user
 
+    @marshal_with_field(fields.List(fields.Nested(resource_fields)))
     def get(self):
-        return "I do work promise"
+        return User.query.order_by(desc(User.id)).all()

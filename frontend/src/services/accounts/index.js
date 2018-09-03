@@ -7,7 +7,8 @@ import {
   requestUpdateAccount,
   receiveUpdateAccount,
   requestDeleteAccount,
-  receiveDeleteAccount
+  receiveDeleteAccount,
+  setCurrentUser as setCurrentUserAction
 } from './actions'
 
 import {
@@ -19,7 +20,7 @@ import {
 
 export const getAccounts = () => {
   return (dispatch) => {
-    dispatch(requestAccounts)
+    dispatch(requestAccounts())
     apiGetAccounts()
       .then((response) => dispatch(receiveAccounts(response)))
       .catch((response) => console.log(`RIP ${response}`))
@@ -29,7 +30,7 @@ export const getAccounts = () => {
 
 export const getAccount = (id) => {
   return (dispatch) => {
-    dispatch(requestAccount)
+    dispatch(requestAccount())
     apiGetAccount(id)
       .then((response) => dispatch(receiveAccount(response)))
   }
@@ -37,7 +38,7 @@ export const getAccount = (id) => {
 
 export const saveAccount = (account) => {
   return (dispatch) => {
-    dispatch(requestUpdateAccount)
+    dispatch(requestUpdateAccount())
     apiSaveAccount(account)
       .then((response) => dispatch(receiveUpdateAccount(response)))
   }
@@ -49,5 +50,11 @@ export const deleteAccount = (id) => {
     apiDeleteAccount(id)
       .then(() => dispatch(receiveDeleteAccount(id)))
       .catch((err) => alert(`Delete failed -> ${err}`))
+  }
+}
+
+export const setCurrentUser = (id) => {
+  return (dispatch) => {
+    dispatch(setCurrentUserAction(id))
   }
 }

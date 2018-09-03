@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 import thunk from 'redux-thunk'
 
 import makeRootReducer from './reducers'
-
+/* eslint no-undef: off */
 // Setup function
 // This sets up enhancers, middleware and applies
 // initial state to the Redux store.

@@ -15,11 +15,11 @@ import {
   getDebts as apiGetDebts,
   saveDebt as apiSaveDebt,
   deleteDebt as apiDeleteDebt
-} from '../api/Debts'
+} from '../api/debts'
 
 export const getDebts = () => {
   return (dispatch) => {
-    dispatch(requestDebts)
+    dispatch(requestDebts())
     apiGetDebts()
       .then((response) => dispatch(receiveDebts(response)))
       .catch((response) => console.log(`RIP ${response}`))
@@ -29,7 +29,7 @@ export const getDebts = () => {
 
 export const getDebt = (id) => {
   return (dispatch) => {
-    dispatch(requestDebt)
+    dispatch(requestDebt())
     apiGetDebt(id)
       .then((response) => dispatch(receiveDebt(response)))
   }
@@ -37,7 +37,7 @@ export const getDebt = (id) => {
 
 export const saveDebt = (Debt) => {
   return (dispatch) => {
-    dispatch(requestUpdateDebt)
+    dispatch(requestUpdateDebt())
     apiSaveDebt(Debt)
       .then((response) => dispatch(receiveUpdateDebt(response)))
   }
@@ -45,7 +45,7 @@ export const saveDebt = (Debt) => {
 
 export const deleteDebt = (id) => {
   return (dispatch) => {
-    dispatch(requestDeleteDebt)
+    dispatch(requestDeleteDebt())
     apiDeleteDebt(id)
       .then(() => dispatch(receiveDeleteDebt(id)))
       .catch((err) => alert(`Delete failed -> ${err}`))

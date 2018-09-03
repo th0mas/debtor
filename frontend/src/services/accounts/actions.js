@@ -6,6 +6,7 @@ export const REQUEST_UPDATE_ACCOUNT = 'REQUEST_UPDATE_ACCOUNT'
 export const RECEIVE_UPDATE_ACCOUNT = 'RECEIVE_UPDATE_ACCOUNT'
 export const REQUEST_DELETE_ACCOUNT = 'REQUEST_DELETE_ACCOUNT'
 export const RECEIVE_DELETE_ACCOUNT = 'RECIEVE_DELETE_ACCOUNT'
+export const SET_USER_ACCOUNT = 'SET_USER_ACCOUNT'
 
 export const requestAccounts = () => {
   return {
@@ -14,6 +15,7 @@ export const requestAccounts = () => {
 }
 
 export const receiveAccounts = (response) => {
+  console.log(response)
   return {
     type: RECEIVE_ACCOUNTS,
     payload: {
@@ -55,6 +57,24 @@ export const receiveUpdateAccount = (response) => {
 export const requestDeleteAccount = (id) => {
   return {
     type: REQUEST_DELETE_ACCOUNT,
+    payload: {
+      id
+    }
+  }
+}
+
+export const receiveDeleteAccount = (id) => {
+  return {
+    type: RECEIVE_DELETE_ACCOUNT,
+    payload: {
+      id
+    }
+  }
+}
+
+export const setCurrentUser = (id) => {
+  return {
+    type: SET_USER_ACCOUNT,
     payload: {
       id
     }
