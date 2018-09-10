@@ -1,6 +1,7 @@
 import { compose, createStore, applyMiddleware } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
+import { loadState, saveSate} from './localStore'
 import thunk from 'redux-thunk'
 
 import makeRootReducer from './reducers'
@@ -8,7 +9,7 @@ import makeRootReducer from './reducers'
 // Setup function
 // This sets up enhancers, middleware and applies
 // initial state to the Redux store.
-export default (initialState = {}) => {
+export default () => {
   // ==================================
   // Devtool extension 
   // ==================================
@@ -23,18 +24,25 @@ export default (initialState = {}) => {
   // =================================
   const history = createBrowserHistory()
   const middleware = [thunk, routerMiddleware(history)]
+  // Load state from local storage
+  const storedState = loadState()
 
   // ================================
   // Init store
   // ================================
   const store = createStore(
     connectRouter(history)(makeRootReducer()),
-    initialState,
+    storedState,
     compose(
       applyMiddleware(...middleware),
       ...enhancers
     )
   )
+
+  // Update local store
+  store.subscribe(() => {
+    saveSate(store.getState())
+  })
 
   store.asyncReducers = {}
 

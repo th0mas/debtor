@@ -1,3 +1,3 @@
-import {RecentActivity} from './RecentActivity'
+import RecentActivity from './RecentActivityContainer'
 
 export default RecentActivity

@@ -11,8 +11,9 @@ export const checkStatus = (response) => {
   }
 }
 
-export const getList = (endpoint) => {
+export const getList = (endpoint, id = null) => {
   let url = `${BASE_URL}/${endpoint}/`
+  url = id ? `${url}/?id=${id}` : url
   return fetch(url)
     .then(checkStatus)
     .then((response) => response.json())

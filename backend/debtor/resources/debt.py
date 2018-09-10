@@ -1,16 +1,19 @@
-from flask_restful import Resource, fields, marshal_with, reqparse, marshal_with_field
+from flask_restful import (Resource, fields, marshal_with, reqparse, 
+                           marshal_with_field)
 from sqlalchemy import desc
 from debtor.core.models import User, Debt
 from debtor import db
 
-from . import user
+user_id = {
+    "id": fields.Integer
+}
 
 resource_fields = {
     "id": fields.Integer,
     "time_created": fields.DateTime,
     "amount": fields.Integer,
-    "debtor": fields.Nested(user.resource_fields),
-    "creditor": fields.Nested(user.resource_fields),
+    "debtor": fields.Nested(user_id),
+    "creditor": fields.Nested(user_id),
     "paid": fields.Boolean
 }
 

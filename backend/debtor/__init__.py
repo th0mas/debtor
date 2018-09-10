@@ -30,10 +30,6 @@ login_manager: LoginManager = LoginManager()
 login_manager.init_app(app)
 
 
-# User Loader declaration
-from .core.models import User  # noqa
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
@@ -49,3 +45,6 @@ app.register_blueprint(api_v1_blueprint)
 # We then make sure we set CORS correctly using flask-cors
 # to allow our api to be accessed
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+# User Loader declaration
+from .core.models import User  # noqa

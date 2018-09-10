@@ -5,23 +5,22 @@ import {
   requestDebt,
   receiveDebt,
   requestUpdateDebt,
-  receiveUpdateDebt,
-  requestDeleteDebt,
-  receiveDeleteDebt
+  receiveUpdateDebt
 } from './actions'
 
 import {
   getDebt as apiGetDebt,
   getDebts as apiGetDebts,
-  saveDebt as apiSaveDebt,
-  deleteDebt as apiDeleteDebt
+  saveDebt as apiSaveDebt
 } from '../api/debts'
 
-export const getDebts = () => {
+export const getDebts = (id) => {
   return (dispatch) => {
     dispatch(requestDebts())
-    apiGetDebts()
-      .then((response) => dispatch(receiveDebts(response)))
+    apiGetDebts(id)
+      .then((response) => {
+        dispatch(receiveDebts(response))
+      })
       .catch((response) => console.log(`RIP ${response}`))
 
   }
@@ -40,14 +39,5 @@ export const saveDebt = (Debt) => {
     dispatch(requestUpdateDebt())
     apiSaveDebt(Debt)
       .then((response) => dispatch(receiveUpdateDebt(response)))
-  }
-}
-
-export const deleteDebt = (id) => {
-  return (dispatch) => {
-    dispatch(requestDeleteDebt())
-    apiDeleteDebt(id)
-      .then(() => dispatch(receiveDeleteDebt(id)))
-      .catch((err) => alert(`Delete failed -> ${err}`))
   }
 }

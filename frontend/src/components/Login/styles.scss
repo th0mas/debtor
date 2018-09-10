@@ -10,5 +10,7 @@
   .card {
     align-self: center;
     max-width: 600px;
+    display: inline-block;
+    min-width: 500px;
   }
 }

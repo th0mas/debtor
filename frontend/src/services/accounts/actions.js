@@ -15,7 +15,6 @@ export const requestAccounts = () => {
 }
 
 export const receiveAccounts = (response) => {
-  console.log(response)
   return {
     type: RECEIVE_ACCOUNTS,
     payload: {

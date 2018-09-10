@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 import { accountReducer, currentUserReducer } from '../services/accounts/reducer'
 import { debtReducer } from '../services/debts/reducer'
-import {DropUIReducer} from '../services/DropUI/reducer'
+import { UIReducer } from '../services/ui/reducer'
 
 const makeEnitiesReducer = () => {
   return combineReducers({
@@ -13,13 +13,10 @@ const makeEnitiesReducer = () => {
 }
 
 const makeRootReducer = () => {
-  const uiReducer = combineReducers({
-    drop: DropUIReducer
-  })
 
   return combineReducers({
     entities: makeEnitiesReducer(),
-    ui: uiReducer
+    ui: UIReducer
   })
 }
 

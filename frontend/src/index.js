@@ -16,5 +16,12 @@ let render = () => {
     MOUNT_NODE
   )
 }
+/* eslint no-undef: off*/
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./components/Root', () => {
+    render()
+  })
+}
 
 render() // Go go go!

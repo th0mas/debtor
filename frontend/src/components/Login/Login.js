@@ -13,34 +13,43 @@ export class Login extends React.PureComponent {
   loginUser = (e) => {
     e.preventDefault()
     this.props.setCurrentUser(parseInt(this.email.value))
+    const location = {
+      pathname: '/',
+      state: {
+        fromLogin: true
+      }
+    }
+    this.props.history.push(location)
   }
   render() {
     return (
-      <Card className={styles.card}>
-        <CardContent>
-          <form className={styles.formHolder} onSubmit={this.loginUser}>
-            <FormControl className={styles.inputBox}>
-              <InputLabel htmlFor='email'>Email</InputLabel>
-              <Input fullWidth
-                id='email'
-                type=''
-                inputRef={(element) => this.email = element}
-              />
-            </FormControl>
-            <FormControl className={styles.inputBox}>
-              <InputLabel htmlFor='password'>Password</InputLabel>
-              <Input fullWidth
-                id='password'
-                type='password'
-                inputRef={(element) => this.password = element}
-              />
-            </FormControl>
-            <CardActions>
-              <Button type='submit'>Login</Button>
-            </CardActions>
-          </form>
-        </CardContent>
-      </Card>
+      <div style={{textAlign: 'center'}}>
+        <Card className={styles.card}>
+          <CardContent>
+            <form className={styles.formHolder} onSubmit={this.loginUser}>
+              <FormControl className={styles.inputBox}>
+                <InputLabel htmlFor='email'>Email</InputLabel>
+                <Input fullWidth
+                  id='email'
+                  type=''
+                  inputRef={(element) => this.email = element}
+                />
+              </FormControl>
+              <FormControl className={styles.inputBox}>
+                <InputLabel htmlFor='password'>Password</InputLabel>
+                <Input fullWidth
+                  id='password'
+                  type='password'
+                  inputRef={(element) => this.password = element}
+                />
+              </FormControl>
+              <CardActions>
+                <Button type='submit'>Login</Button>
+              </CardActions>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
     )
   }
 }

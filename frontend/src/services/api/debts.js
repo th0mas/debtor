@@ -6,7 +6,7 @@ export const getDebts = () => {
   return getList(DEBT_ENDPOINT)
 }
 
-export const getDebt = (id) => {
+export const getDebt = (id = null) => {
   return getItem(DEBT_ENDPOINT, id)
 }
 

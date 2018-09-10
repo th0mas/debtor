@@ -1,0 +1,26 @@
+@import '../../styles/_variables.scss';
+:local {
+  h1, h2, h3, h4 {
+    font-family: $title-font
+  }
+
+  .card {
+    margin: 10px;
+    animation: fadein 0.5s ease-in;
+  }
+  .debtText {
+    color: $primary
+  }
+  .creditText {
+    color: $secondary
+  }
+
+  .subText {
+    color: grey;
+    font-size: 0.6em;
+  }
+  @keyframes fadein {
+    from {opacity: 0}
+    to {opacity: 1}
+  }
+}

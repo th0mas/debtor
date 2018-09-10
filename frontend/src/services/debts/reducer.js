@@ -1,4 +1,4 @@
-import uniq from 'lodash/uniq'
+import uniqBy from 'lodash/uniqBy'
 
 import {
   RECEIVE_DEBTS,
@@ -6,15 +6,15 @@ import {
   RECEIVE_UPDATE_DEBT,
 } from './actions'
 
-const initialDebtState = {}
+const initialDebtState = [] 
 
 export const debtReducer = (state = initialDebtState, action) => {
   switch (action.type) {
   case RECEIVE_DEBTS:
-    return uniq([...action.payload.response, ...state])
+    return uniqBy([...action.payload.response, ...state], 'id')
   case RECEIVE_DEBT:
   case RECEIVE_UPDATE_DEBT:
-    return uniq([action.payload.response, ...state])
+    return uniqBy([action.payload.response, ...state], 'id')
   default:
     return state
 

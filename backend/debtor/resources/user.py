@@ -1,4 +1,5 @@
-from flask_restful import Resource, fields, marshal_with, reqparse, marshal_with_field
+from flask_restful import (Resource, fields, marshal_with, reqparse, 
+                           marshal_with_field)
 from sqlalchemy import desc
 from debtor.core.models import User
 from debtor import db

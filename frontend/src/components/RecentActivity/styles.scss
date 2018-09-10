@@ -1,0 +1,43 @@
+@import '../../styles/_variables.scss';
+
+:local {
+  .headerCardHolder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .headerItem {
+    display: block;
+    padding: 10px;
+  }
+
+  .bad {
+    color: $primary
+  }
+
+  .good {
+    color: $secondary
+  }
+
+  .activityHolder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .activityList {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  @media (max-width: 600px) {
+    .activityHolder {
+      display: block;
+    }
+  }
+
+  .toggleSlider{
+    text-align: right;
+  }
+    
+}
