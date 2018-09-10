@@ -46,43 +46,47 @@ export class RecentActivity extends React.PureComponent {
     return (creditTotal / 100).toFixed(2)
   }
   render() {
-    return (
-      <div>
-        <div className={styles.headerCardHolder}>
-          <div className={styles.headerItem}>
-            <h3 className={styles.bad}>DEBT</h3>
-            <h2>
-              £{this.addDebt()}
-            </h2>
+    if (this.props.accounts) {
+      return (
+        <div>
+          <div className={styles.headerCardHolder}>
+            <div className={styles.headerItem}>
+              <h3 className={styles.bad}>DEBT</h3>
+              <h2>
+                £{this.addDebt()}
+              </h2>
+            </div>
+            <div className={styles.headerItem}>
+              <h3 className={styles.good}>OWED</h3>
+              <h2>
+                £{this.addCredit()}
+              </h2>
+            </div>
           </div>
-          <div className={styles.headerItem}>
-            <h3 className={styles.good}>OWED</h3>
-            <h2>
-              £{this.addCredit()}
-            </h2>
+          <div className={styles.toggleSlider}>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.props.viewAll}
+                  onChange={this.props.toggleViewAll}
+                  value="viewAll"
+                />
+              }
+              label="View All"
+            />
+          </div>
+          <div className={styles.activityHolder}>
+            <div className={styles.activityList}>
+              {this.getDebts(this.props.viewAll).map((debt, i) => <ActivityCard activity={debt} type={'debt'} key={i} />)}
+            </div>
+            <div className={styles.activityList}>
+              {this.getCredits(this.props.viewAll).map((credit, i) => <ActivityCard activity={credit} type={'credit'} key={i} />)}
+            </div>
           </div>
         </div>
-        <div className={styles.toggleSlider}>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.props.viewAll}
-                onChange={this.props.toggleViewAll}
-                value="viewAll"
-              />
-            }
-            label="View All"
-          />
-        </div>
-        <div className={styles.activityHolder}>
-          <div className={styles.activityList}>
-            {this.getDebts(this.props.viewAll).map((debt, i) => <ActivityCard activity={debt} type={'debt'} key={i} />)}
-          </div>
-          <div className={styles.activityList}>
-            {this.getCredits(this.props.viewAll).map((credit, i) => <ActivityCard activity={credit} type={'credit'} key={i} />)}
-          </div>
-        </div>
-      </div>
-    )
+      )
+    } else {
+      return <h2>loading...</h2>
+    }
   }
 }

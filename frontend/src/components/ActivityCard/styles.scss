@@ -8,10 +8,17 @@
     margin: 10px;
     animation: fadein 0.5s ease-in;
   }
+
+  .cardHeader {
+    display: flex;
+    align-items: center;
+  }
   .debtText {
+    padding: 0 0.2em 0 0.2em;
     color: $primary
   }
   .creditText {
+    padding: 0 0.2em 0 0.2em;
     color: $secondary
   }
 

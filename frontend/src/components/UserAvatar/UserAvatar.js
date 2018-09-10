@@ -10,6 +10,7 @@ export class UserAvatar extends React.Component {
   constructor(props) {
     super(props)
     this.state = { anchor: null }
+    this.user = this.props.users.filter(user => user.id === this.props.id)[0]
   }
 
   handleClick = (event) => {
@@ -17,7 +18,6 @@ export class UserAvatar extends React.Component {
       anchor: event.currentTarget,
     })
   }
-
   handleClose = () => {
     this.setState({
       anchor: null,
@@ -32,7 +32,8 @@ export class UserAvatar extends React.Component {
         <Avatar aria-haspopup="true"
           className={styles.avatar}
           onClick={this.handleClick}
-        >t</Avatar>
+          src={this.user.profile_img}
+        ></Avatar>
 
         <Popover
           id="user-popper"
@@ -48,7 +49,7 @@ export class UserAvatar extends React.Component {
             horizontal: 'right',
           }}
         >
-          <UserCard />
+          <UserCard user={this.user}/>
         </Popover>
       </div>
     )
