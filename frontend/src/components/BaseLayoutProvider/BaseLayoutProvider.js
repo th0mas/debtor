@@ -14,7 +14,7 @@ export const Base = () => {
         <Switch>
           <Route exact path='/' component={RecentActivity} />
           <Route path='/login' component={Login} />
-          <Route path='/user/:uuid' component={Profile} />
+          <Route path='/user/:uuid(\d+)' component={Profile} />
         </Switch>
       </div>
     </div>

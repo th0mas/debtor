@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import Chip from '@material-ui/core/Chip'
 import UserAvatar from '../UserAvatar'
 import ForwardArrow from '@material-ui/icons/ArrowForward'
+import Tick from '@material-ui/icons/Done'
 
 import styles from './styles.scss'
 
@@ -18,24 +19,31 @@ export const ActivityCard = ({ activity, type, users, currentUser }) => {
   const creditorName = activity.creditor.id === currentUser ? 'You' : getUser(activity.creditor.id).name
 
   const textStyle = type === 'debt' ? styles.debtText : styles.creditText
-
+  const cardBackground = `${styles.card} ${activity.paid ? styles.cardPaid : ''}`
   return (
-    <Card className={styles.card}>
+    <Card className={cardBackground}>
       <CardContent>
         <span className={styles.cardHeader}>
           <Chip label={debtorName} variant='outlined'
-            avatar={<UserAvatar id={activity.debtor.id}/>}/>
-          <h2 className={textStyle}> <ForwardArrow /></h2>
+            avatar={<UserAvatar id={activity.debtor.id} />} />
+          <h2 className={textStyle}> 
+            {activity.paid
+              ? <Tick />
+              : <ForwardArrow />
+            }
+          </h2>
           <Chip label={creditorName} variant='outlined'
-            avatar={<UserAvatar id={activity.creditor.id} /> }/>
+            avatar={<UserAvatar id={activity.creditor.id} />} />
         </span>
         <h1>£{(activity.amount / 100).toFixed(2)}</h1>
         <p>Interesting placeholder message.</p>
         {/*<span className={styles.subText}>{activity.time_created}</span> */}
         <CardActions>
-          {type === 'debt'
-            ? <Button variant='outlined' color='primary'>Pay</Button>
-            : <Button variant='contained' color='secondary'>Nag</Button>
+          {activity.paid
+            ? <Button variant='flat' disabled color='secondary'>PAID</Button>
+            : type === 'debt'
+              ? <Button variant='outlined' color='primary'>Pay</Button>
+              : <Button variant='contained' color='secondary'>Nag</Button>
           }
         </CardActions>
       </CardContent>

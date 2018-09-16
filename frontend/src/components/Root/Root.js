@@ -20,7 +20,6 @@ const theme = createMuiTheme({
 
 const Root = ({ store }) => {
   const history = createBrowserHistory()
-
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>

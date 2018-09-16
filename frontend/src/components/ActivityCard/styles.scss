@@ -26,6 +26,12 @@
     color: grey;
     font-size: 0.6em;
   }
+
+  .cardPaid {
+    background-color: $grey !important;
+    color: $dark-grey !important;
+    h1 {text-decoration: line-through;}
+  }
   @keyframes fadein {
     from {opacity: 0}
     to {opacity: 1}
