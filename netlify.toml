@@ -1,0 +1,7 @@
+[Settings]
+ID = "infallible-babbage-fd9286"
+
+[build]
+    base    = "frontend/"
+    publish = "frontend/build/"
+    command = "yarn build"
