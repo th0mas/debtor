@@ -3,6 +3,15 @@
 :local {
     .userCard {
         max-width: 300px;
+        min-width: 300px;
+        height: fit-content;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 15px;
+    }
+
+    .userCard img {
+        height: 300px;
     }
 
     .cardHeader {

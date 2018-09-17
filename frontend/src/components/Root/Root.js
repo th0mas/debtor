@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
 import PropTypes from 'prop-types'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import Routes from '../../routes'
+import BaseLayout from '../BaseLayoutProvider'
 import AppBar from '../AppBar'
 
 const theme = createMuiTheme({
@@ -20,12 +20,13 @@ const theme = createMuiTheme({
 
 const Root = ({ store }) => {
   const history = createBrowserHistory()
+  const currentUser = store.getState().entities.currentUser
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <MuiThemeProvider theme={theme}>
           <AppBar />
-          <Routes />
+          <BaseLayout currentUser={currentUser}/>
         </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>

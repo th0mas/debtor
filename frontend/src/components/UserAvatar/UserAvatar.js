@@ -10,7 +10,6 @@ export class UserAvatar extends React.Component {
   constructor(props) {
     super(props)
     this.state = { anchor: null }
-    this.user = this.props.users.filter(user => user.id === this.props.id)[0]
   }
 
   handleClick = (event) => {
@@ -32,7 +31,7 @@ export class UserAvatar extends React.Component {
         <Avatar aria-haspopup="true"
           className={styles.avatar}
           onClick={this.handleClick}
-          src={this.user.profile_img}
+          src={this.props.user.profile_img}
         ></Avatar>
 
         <Popover
@@ -48,8 +47,9 @@ export class UserAvatar extends React.Component {
             vertical: 'top',
             horizontal: 'right',
           }}
+          
         >
-          <UserCard user={this.user}/>
+          <UserCard user={this.props.user}/>
         </Popover>
       </div>
     )

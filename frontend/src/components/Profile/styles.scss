@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+:local {
+  .layout {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .userCard {
+    height: fit-content;
+  }
+
+  .activty {
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .backgroundCard {
+    position: absolute;
+    width: 100vw;
+    height: 400px;
+    margin-left: -80px;
+    margin-top: -40px;
+    z-index: -100;
+    background: $grey !important;
+  }
+}

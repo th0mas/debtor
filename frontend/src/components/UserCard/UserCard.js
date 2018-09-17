@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
+import {Link} from 'react-router-dom'
 
 import styles from './styles.scss'
 
@@ -16,7 +17,7 @@ export const UserCard = ({ user }) => {
         src={user.profile_img}
         height="100%" />
       <CardContent className={styles.cardHeader}>
-        <h1>{user.name}</h1>
+        <h1><Link to={`/user/${user.id}`}>{user.name}</Link></h1>
         <p>{user.email}</p>
         <CardActions>
           <Button variant="contained" color="primary">
