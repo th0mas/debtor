@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
 
 import styles from './styles.scss'
 
-export const UserCard = ({ user }) => {
+export const UserCard = ({ user, push }) => {
   return (
     <Card className={styles.userCard}>
       <CardMedia
@@ -23,7 +23,7 @@ export const UserCard = ({ user }) => {
           <Button variant="contained" color="primary">
             Pay
           </Button>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={() => push('/debt/')}>
             Request
           </Button>
 

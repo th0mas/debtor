@@ -1,6 +1,5 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { createBrowserHistory } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
 import PropTypes from 'prop-types'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
@@ -18,8 +17,7 @@ const theme = createMuiTheme({
   }
 })
 
-const Root = ({ store }) => {
-  const history = createBrowserHistory()
+const Root = ({ store, history }) => {
   const currentUser = store.getState().entities.currentUser
   return (
     <Provider store={store}>
