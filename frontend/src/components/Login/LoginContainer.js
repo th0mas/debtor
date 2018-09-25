@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-
+import { push } from 'connected-react-router'
 import { setCurrentUser } from '../../services/accounts'
 import { Login } from './Login'
 
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUser: (id) => dispatch(setCurrentUser(id))
+    setCurrentUser: (id) => dispatch(setCurrentUser(id)),
+    push: (location) => dispatch(push(location))
   }
 }
 

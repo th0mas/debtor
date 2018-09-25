@@ -18,13 +18,12 @@ const theme = createMuiTheme({
 })
 
 const Root = ({ store, history }) => {
-  const currentUser = store.getState().entities.currentUser
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <MuiThemeProvider theme={theme}>
           <AppBar />
-          <BaseLayout currentUser={currentUser}/>
+          <BaseLayout />
         </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>

@@ -5,8 +5,9 @@ import { getDebts } from '../../services/debts'
 import { toggleViewAll } from '../../services/ui'
 import { RecentActivity } from './RecentActivity'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
+    user: ownProps.user || state.entities.currentUser,
     currentUser: state.entities.currentUser,
     accounts: state.entities.accounts,
     debts: state.entities.debts,
@@ -22,5 +23,6 @@ const mapDispatchToProps = (dispatch) => {
     toggleViewAll: () => dispatch(toggleViewAll())
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecentActivity)

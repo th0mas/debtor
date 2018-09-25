@@ -19,7 +19,7 @@ export class Login extends React.PureComponent {
         fromLogin: true
       }
     }
-    this.props.history.push(location)
+    this.props.push(location)
   }
   render() {
     return (
