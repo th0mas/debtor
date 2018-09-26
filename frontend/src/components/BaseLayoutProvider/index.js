@@ -1,3 +1,3 @@
-import {Base} from './BaseLayoutProvider'
+import Base from './BaseLayoutProviderContainer'
 
 export default Base
