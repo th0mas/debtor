@@ -64,8 +64,7 @@ class User(db.Model, UserMixin):
 
 class Debt(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    time_created = db.Column(db.DateTime, default=datetime.utcnow())
-
+    time_created = db.Column(db.DateTime, default=datetime.utcnow)
     # Amount of debt in pence.
     # By storing as an integer it removes the possibility of float inacuracies.
     # It also makes representation more consistent and allows for simpler logic
