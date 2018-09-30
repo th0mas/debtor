@@ -19,7 +19,7 @@ export const Base = ({currentUser}) => {
           }} />
           <Route path='/recent' render={() => <RecentActivity user={currentUser}/>}/>
           <Route path='/login' component={Login} />
-          <Route path='/debt/' component={Debt} />
+          <Route path='/debt/:creditor(\d+)/:debtor(\d+)' component={Debt} />
           <Route path='/debt/:id' component={Debt} />
           <Route path='/user/:uuid(\d+)' component={Profile} />
         </Switch>

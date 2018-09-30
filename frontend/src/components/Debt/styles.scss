@@ -3,7 +3,17 @@
         max-width: 500px;
     }
 
-    .inputBox {
-        display: block;
+    .formHolder {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .avatarHolder {
+        display: flex;
+    }
+
+    .arrow {
+        padding: 5px;
     }
 }

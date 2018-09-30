@@ -5,12 +5,16 @@ import { Typography } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
-//import UserAvatar from '../UserAvatar'
+import UserAvatar from '../UserAvatar'
 //import Button from '@material-ui/core/Button'
 
 import styles from './styles.scss'
 
-const AppBar = () => {
+const getUserById = (userId, users) => {
+  return users.find(user => user.id === userId)
+}
+
+const AppBar = ({currentUser, users}) => {
   return (
     <div>
       <MuiAppBar position="absolute">
@@ -19,12 +23,12 @@ const AppBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant='title' color='inherit' className={styles.title}>
-            debtor
+            <Link to='/recent/'>debtor</Link>
           </Typography>
-          {/* users
-            ? <UserAvatar id={currentUser} />
+          {users.length > 0
+            ? <UserAvatar user={getUserById(currentUser, users)} />
             : null
-          */}
+          }
         </Toolbar>
       </MuiAppBar>
     </div>

@@ -21,7 +21,7 @@ export const UserCard = ({ user, currentUser, push }) => {
         <Button variant="contained" color="primary">
           Pay
         </Button>
-        <Button variant="outlined" color="primary" onClick={() => push('/debt/')}>
+        <Button variant="outlined" color="primary" onClick={() => push(`/debt/${currentUser}/${user.id}`)}>
           Request
         </Button>
       </CardActions>
