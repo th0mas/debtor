@@ -10,9 +10,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
+import os
+import jwt
 
 # Create the base Flask object using local namespace.
 app: Flask = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_APP_SECRET_KEY")
 
 # Initialize the Database.
 # This creates a database object that is used to declare models 
@@ -30,11 +33,6 @@ login_manager: LoginManager = LoginManager()
 login_manager.init_app(app)
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
-
 # Initialize and register the API blueprint.
 # This holds all the routes required for the REST api
 # I'm using a blueprint in case I need to add another API version
@@ -48,3 +46,16 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # User Loader declaration
 from .core.models import User  # noqa
+@login_manager.request_loader
+def load_user_from_request(request):
+    token = request.headers.get('Authorization')
+    if token:
+        token = token.replace('JWT ', '', 1)
+        print(token)
+        result = User.decode_auth_token(token)
+        if isinstance(result, User):
+            return result
+        else:
+            return None
+    # finally, return None if both methods did not login the user
+    return None

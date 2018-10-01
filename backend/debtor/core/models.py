@@ -1,6 +1,7 @@
-from datetime import datetime
-
-from debtor import db, bcrypt
+from datetime import datetime, timedelta
+import os
+import jwt
+from debtor import db, bcrypt, app
 from flask_login import UserMixin
 
 
@@ -60,6 +61,53 @@ class User(db.Model, UserMixin):
         Returns a True/False value depending on if passwords are correct
         """
         return bcrypt.check_password_hash(self.password, password)
+    
+    def create_jwt(self):
+        payload = {
+            'exp': datetime.utcnow() + timedelta(days=1, seconds=5),
+            'iat': datetime.utcnow(),
+            'user': self.id
+        }
+        return jwt.encode(
+            payload,
+            app.secret_key,
+            algorithm='HS256'
+        )
+
+    @staticmethod  
+    def decode_auth_token(auth_token):
+        try:
+            payload = jwt.decode(auth_token, app.secret_key)
+            is_blacklisted_token = BlacklistToken.verify_token_blacklist(auth_token)
+            if is_blacklisted_token:
+                return 'Token blacklisted. Please log in again.'
+            else:
+                return User.query.get(payload['user'])
+        except jwt.ExpiredSignatureError:
+            return 'Signature expired. Please log in again.'
+        except jwt.InvalidTokenError:
+            return 'Invalid token. Please log in again.'
+
+class BlacklistToken(db.Model):
+    """
+    As we are using JSON web tokens for authentication,
+    we need a way to revoke tokens and blacklist them , for example
+    on user logout or security breach. We'll just keep track of them here.
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    token = db.Column(db.String(500), unique=True, nullable=False)
+    blacklisted_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __init__(self, token):
+        self.token = token
+    
+    @staticmethod
+    def verify_token_blacklist(token: bytes) -> bool:
+        result = BlacklistToken.query.filter_by(token=str(token)).first()
+        if result:
+            return True
+        else:
+            return False
 
 
 class Debt(db.Model):

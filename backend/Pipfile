@@ -13,6 +13,8 @@ flask-login = "*"
 flask-bcrypt = "*"
 python-dotenv = "*"
 flask-cors = "*"
+itsdangerous = "*"
+pyjwt = "*"
 
 [dev-packages]
 pylint = "*"

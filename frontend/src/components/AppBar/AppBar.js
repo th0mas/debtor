@@ -23,9 +23,9 @@ const AppBar = ({currentUser, users}) => {
             <MenuIcon />
           </IconButton>
           <Typography variant='title' color='inherit' className={styles.title}>
-            <Link to='/recent/'>debtor</Link>
+            <Link to='/'>debtor</Link>
           </Typography>
-          {users.length > 0
+          {users.length > 0 && currentUser
             ? <UserAvatar user={getUserById(currentUser, users)} />
             : null
           }

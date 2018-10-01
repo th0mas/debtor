@@ -36,7 +36,7 @@ export const ActivityCard = ({ activity, type, users, currentUser }) => {
         </span>
         <h1>£{(activity.amount / 100).toFixed(2)}</h1>
         <p>Interesting placeholder message.</p>
-        {/*<span className={styles.subText}>{activity.time_created}</span> */}
+        <span className={styles.subText}>{activity.time_created}</span>
         <CardActions>
           {activity.paid
             ? <Button variant='flat' disabled color='secondary'>PAID</Button>
