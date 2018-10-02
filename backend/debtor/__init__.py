@@ -51,7 +51,6 @@ def load_user_from_request(request):
     token = request.headers.get('Authorization')
     if token:
         token = token.replace('JWT ', '', 1)
-        print(token)
         result = User.decode_auth_token(token)
         if isinstance(result, User):
             return result

@@ -1,14 +1,15 @@
 from flask_restful import Resource, reqparse
 from flask_login import current_user, login_required
-from flask import jsonify
+from flask import jsonify, request
 import datetime
 import jwt
-from debtor import app
-from debtor.core.models import User
+from debtor import db
+from debtor.core.models import User, BlacklistToken
 
 parser = reqparse.RequestParser()
 parser.add_argument("email", type=str)
 parser.add_argument("password", type=str)
+parser.add_argument("token", type=str)
 
 
 class Auth(Resource):
@@ -31,7 +32,11 @@ class Auth(Resource):
     
     @login_required
     def delete(self):
-        current_user.key = ""
-        db.session.add(current_user)
-        db.session.commit()
+        token = request.headers.get('Authorization')
+        if token:
+            token = token.replace('JWT ', '', 1)
+            bl_token = BlacklistToken(token)
+
+            db.session.add(bl_token)
+            db.session.commit()
         return "Logged out"
