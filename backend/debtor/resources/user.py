@@ -1,5 +1,6 @@
 from flask_restful import (Resource, fields, marshal_with, reqparse, 
                            marshal_with_field)
+from flask_login import login_required, current_user
 from sqlalchemy import desc
 from debtor.core.models import User
 from debtor import db
@@ -31,6 +32,10 @@ class Users(Resource):
     """
     Endpoint for /user/:id
     """
+
+    method_decorators=[login_required]
+
+
     @marshal_with(resource_fields)
     def get(self, id):
         return User.query.filter_by(id=id) \
@@ -66,6 +71,7 @@ class UsersList(Resource):
     """
     Endpoint for /users
     """
+
     @marshal_with(resource_fields)
     def post(self):
         args = parser.parse_args()
@@ -82,6 +88,7 @@ class UsersList(Resource):
 
         return user
 
+    @login_required
     @marshal_with_field(fields.List(fields.Nested(resource_fields)))
     def get(self):
         return User.query.order_by(desc(User.id)).all()

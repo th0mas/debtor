@@ -13,12 +13,12 @@ export const Base = ({ currentUser }) => {
 
   const loggedInRoutes = currentUser
     ?
-    <React.Fragment>
+    <Switch>
       <Route path='/recent' render={() => <RecentActivity user={currentUser} />} />
-      <Route path='/debt/:creditor(\d+)/:debtor(\d+)' component={Debt} />
+      <Route path='/debt/:creditor(\d+)/:debtor(\d+)' exact component={Debt} />
       <Route path='/debt/:id' component={Debt} />
       <Route path='/user/:uuid(\d+)' component={Profile} />
-    </React.Fragment>
+    </Switch>
     : <Route path='/' render={() => <Redirect to='/' />} />
   return (
     <div>

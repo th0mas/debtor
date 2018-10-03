@@ -42,7 +42,7 @@ app.register_blueprint(api_v1_blueprint)
 
 # We then make sure we set CORS correctly using flask-cors
 # to allow our api to be accessed
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "https://debtor.tomhaines.xyz"]}})
 
 # User Loader declaration
 from .core.models import User  # noqa
@@ -50,7 +50,7 @@ from .core.models import User  # noqa
 def load_user_from_request(request):
     token = request.headers.get('Authorization')
     if token:
-        token = token.replace('JWT ', '', 1)
+        token = token.replace('Bearer ', '', 1)
         result = User.decode_auth_token(token)
         if isinstance(result, User):
             return result

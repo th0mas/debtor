@@ -1,6 +1,7 @@
 from flask_restful import (Resource, fields, marshal_with, reqparse, 
                            marshal_with_field)
 from sqlalchemy import desc
+from flask_login import current_user, login_required
 from debtor.core.models import User, Debt
 from debtor import db
 
@@ -25,6 +26,9 @@ parser.add_argument("paid", type=bool)
 
 
 class Debts(Resource):
+
+    method_decorators=[login_required]
+
     @marshal_with(resource_fields)
     def get(self, id):
         return Debt.query.filter_by(id=id) \
@@ -61,6 +65,9 @@ class Debts(Resource):
 
 
 class DebtList(Resource):
+
+    method_decorators=[login_required]
+
     @marshal_with_field(fields.List(fields.Nested(resource_fields)))
     def get(self):
         return Debt.query.order_by(desc(Debt.time_created)).all()

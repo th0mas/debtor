@@ -28,7 +28,7 @@ export class RecentActivity extends React.PureComponent {
 
   render() {
     const classes = `${this.props.userProfile ? styles.userProfilePadding : null}`
-    if (this.props.accounts) {
+    if (this.props.accounts.length > 0) {
       return (
         <div className={classes}>
           <TopBar debts={this.getDebts()} credits={this.getCredits()} />

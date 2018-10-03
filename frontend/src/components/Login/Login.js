@@ -12,7 +12,7 @@ import styles from './styles.scss'
 export class Login extends React.PureComponent {
   loginUser = (e) => {
     e.preventDefault()
-    this.props.setCurrentUser(parseInt(this.email.value))
+    this.props.loginUser(this.email.value, this.password.value)
     const location = {
       pathname: '/',
       state: {

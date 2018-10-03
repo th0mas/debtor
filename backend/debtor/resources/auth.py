@@ -34,7 +34,7 @@ class Auth(Resource):
     def delete(self):
         token = request.headers.get('Authorization')
         if token:
-            token = token.replace('JWT ', '', 1)
+            token = token.replace('Bearer ', '', 1)
             bl_token = BlacklistToken(token)
 
             db.session.add(bl_token)

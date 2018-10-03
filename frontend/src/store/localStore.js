@@ -13,8 +13,9 @@ export const loadState = () => {
 export const saveSate = (state) => {
   const savedAttrs = {
     entities: {
-      currentUser: state.entities.currentUser
-    }
+      currentUser: state.entities.currentUser,
+    },
+    auth: state.auth
   }
   try {
     const serializedState = JSON.stringify(savedAttrs)

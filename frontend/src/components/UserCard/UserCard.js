@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom'
 
 import styles from './styles.scss'
 
-export const UserCard = ({ user, currentUser, push, setCurrentUser }) => {
+export const UserCard = ({ user, currentUser, push, logoutUser }) => {
   let actions
   if (user.id === currentUser) {
     actions = (<CardActions>
-      <Button variant="outlined" color="secondary" onClick={() => setCurrentUser(null)}>Logout</Button>
+      <Button variant="outlined" color="secondary" onClick={() => logoutUser()}>Logout</Button>
     </CardActions>)
   } else {
     actions = (
