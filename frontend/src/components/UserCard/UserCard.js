@@ -34,7 +34,7 @@ export const UserCard = ({ user, currentUser, push, logoutUser }) => {
         src={user.profile_img}
         height="100%" />
       <CardContent className={styles.cardHeader}>
-        <h1><Link to={`/user/${user.id}`}>{user.name}</Link></h1>
+        <h1><Link to={`/user/${user.id}`} className={styles.userLink}>{user.name}</Link></h1>
         <p>{user.email}</p>
         { actions }
       </CardContent>

@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+:local {
+    .title {
+        font-size: 3rem;
+    }
+
+    .loginLink {
+        font-size: 2rem;
+        color: $secondary;
+    }
+
+
+    .loginButtonContainer {
+        text-align: center;
+    }
+
+}

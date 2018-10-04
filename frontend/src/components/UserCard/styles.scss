@@ -17,4 +17,8 @@
     .cardHeader {
         font-family: $title-font;
     }
+
+    .userLink:hover {
+        text-decoration: underline;
+    }
 }

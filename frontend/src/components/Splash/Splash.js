@@ -1,11 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+
+import styles from './styles.scss'
 
 export const Splash = () => {
   return (
-    <div>
-      <h1>Make lending money easy - and fun.</h1>
-      <Link to='/login/'>Login</Link>
+    <div className={styles.header}>
+      <h1 className={styles.title}>Make lending money easy - and fun.</h1>
+      <div className={styles.loginButtonContainer}>
+        <Button variant='outlined'><Link to='/login'>Login</Link></Button>
+      </div>
     </div>
   )
 } 

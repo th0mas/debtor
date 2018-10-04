@@ -23,6 +23,12 @@ export class UserAvatar extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.user.id != this.props.user.id) {
+      this.handleClose()
+    }
+  }
+
   render() {
     const anchor = this.state.anchor
     const open = Boolean(anchor)
