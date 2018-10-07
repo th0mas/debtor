@@ -12,14 +12,14 @@ import {
   getNewToken as apiGetNewToken
 } from '../api/auth'
 
-import { setCurrentUser } from '../accounts'
+import { setCurrentUser, getAccounts } from '../accounts'
 
 export const loginUser = (username, password) => {
   return (dispatch) => {
     dispatch(requestLoginUser())
     apiLoginUser(username, password)
       .then((resp) => dispatch(recieveUserToken(resp.Authorization)))
-      .then(() => dispatch(initUser()))
+      .then(() => dispatch(initUser(getAccounts)))
   }
 }
 
