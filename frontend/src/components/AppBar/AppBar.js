@@ -17,7 +17,7 @@ const getUserById = (userId, users) => {
 const AppBar = ({currentUser, users}) => {
   return (
     <div>
-      <MuiAppBar position="absolute">
+      <MuiAppBar position="fixed">
         <Toolbar>
           <IconButton color="inherit" aria-label="Menu">
             <MenuIcon />

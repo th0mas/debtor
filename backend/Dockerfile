@@ -1,10 +1,11 @@
-FROM python:3.7-alpine
+from python:3.7-alpine
+
 ADD . /app
 WORKDIR /app
 RUN apk update && apk add build-base postgresql-dev libffi-dev
 RUN pip install pipenv
-RUN pipenv install
+RUN pipenv install --deploy --system
+RUN pip3 install gunicorn
 
-EXPOSE 5000
 
-CMD ["pipenv", "run", "python", "manage.py", "run"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "debtor:app"]

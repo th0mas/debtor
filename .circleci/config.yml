@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker: 
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - add-ssh-keys:
+          fingerprints:
+            - "bc:81:a8:28:1d:63:6c:df:a0:55:36:af:cf:d1:84:63"
+      - run:
+          name: Keyscan deploy (HACK)
+          command: ssh-keyscan -H ssh.tomhaines.xyz >> ~/.ssh/known_hosts
+      - run:
+          command: "git remote add dokku dokku@ssh.tomhaines.xyz:debtor"
+      - deploy:
+          command: "git subtree push --prefix backend dokku master"
+  
