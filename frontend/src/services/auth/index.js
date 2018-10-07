@@ -19,7 +19,7 @@ export const loginUser = (username, password) => {
     dispatch(requestLoginUser())
     apiLoginUser(username, password)
       .then((resp) => dispatch(recieveUserToken(resp.Authorization)))
-      .then(() => dispatch(initUser(getAccounts)))
+      .then(() => dispatch(initUser([getAccounts])))
   }
 }
 
