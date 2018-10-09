@@ -1,3 +1,4 @@
+import { handleAuthError } from '../auth'
 const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://debtor-api.tomhaines.xyz/api/v1' : 'http://localhost:5000/api/v1' /* eslint no-undef: off*/
 
 var authToken
@@ -15,9 +16,11 @@ export const setApiToken = (token) => {
 }
 
 export const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300)
+  if (response.status >= 200 && response.status < 300) {
     return response
-  else {
+  } else if (response.status === 401) {
+    handleAuthError()
+  } else {
     // Make sure we throw errors in the correct place
     let error = new Error(response.statusText)
     error.response = response
@@ -30,14 +33,14 @@ export const checkStatus = (response) => {
 export const getList = (endpoint, id = null) => {
   let url = `${BASE_URL}/${endpoint}/`
   url = id ? `${url}/?id=${id}` : url
-  return fetch(url, {headers: createHeaders()})
+  return fetch(url, { headers: createHeaders() })
     .then(checkStatus)
     .then((response) => response.json())
 }
 
 export const getItem = (endpoint, id) => {
   let url = `${BASE_URL}/${endpoint}/${id}/`
-  return fetch(url, {headers: createHeaders()})
+  return fetch(url, { headers: createHeaders() })
     .then(checkStatus)
     .then((response) => response.json())
 }

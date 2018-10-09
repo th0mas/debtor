@@ -14,6 +14,8 @@ import {
 
 import { setCurrentUser, getAccounts } from '../accounts'
 
+import { store } from '../../store'
+
 export const loginUser = (username, password) => {
   return (dispatch) => {
     dispatch(requestLoginUser())
@@ -52,6 +54,11 @@ export const initUser = (initFuncs = []) => {
       dispatch(setCurrentUser(0))
     }
   }
+}
+
+export const handleAuthError = () => {
+  console.log('Logging out user') /* eslint no-console: off */
+  store.dispatch(setCurrentUser(0))
 }
 
 const decodeJWT = (token) => {
