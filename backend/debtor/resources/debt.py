@@ -20,8 +20,10 @@ resource_fields = {
 
 parser = reqparse.RequestParser()
 parser.add_argument("amount", type=str)
-parser.add_argument("debtor_id", type=int)
+parser.add_argument("debtor", type=dict)
 parser.add_argument("creditor_id", type=int)
+parser.add_argument("debtor_id", type=int)
+parser.add_argument("creditor", type=dict)
 parser.add_argument("paid", type=bool)
 
 
@@ -45,7 +47,10 @@ class Debts(Resource):
         debt = Debt.query.filter_by(id=id) \
             .first_or_404()
         paid = args["paid"]
-        if paid:
+
+        # Only the creditor should be able to change the debt status
+        print(args)
+        if paid and current_user.id == args.get('creditor').get('id'):
             debt.paid = paid
 
         db.session.add(debt)
