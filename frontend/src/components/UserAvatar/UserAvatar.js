@@ -32,7 +32,6 @@ export class UserAvatar extends React.Component {
   render() {
     const anchor = this.state.anchor
     const open = Boolean(anchor)
-    console.log(this.props)
     return (
       <div>
         <Avatar aria-haspopup="true"

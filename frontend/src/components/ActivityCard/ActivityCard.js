@@ -10,7 +10,7 @@ import Tick from '@material-ui/icons/Done'
 
 import styles from './styles.scss'
 
-export const ActivityCard = ({ activity, type, users, currentUser }) => {
+export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) => {
   const getUser = (id) => {
     return users.filter(user => user.id === id)[0]
   }
@@ -41,7 +41,7 @@ export const ActivityCard = ({ activity, type, users, currentUser }) => {
             ? <Button variant='flat' disabled color='secondary'>PAID</Button>
             : type === 'debt'
               ? <Button variant='outlined' color='primary'>Pay</Button>
-              : <Button variant='contained' color='secondary'>Nag</Button>
+              : <Button variant='contained' color='secondary' onClick={() => (saveDebt({...activity, paid: true}))}>Settle</Button>
           }
         </CardActions>
       </CardContent>
