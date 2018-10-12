@@ -13,7 +13,7 @@ export const Profile = ({ match, users }) => {
       <div>
         <Paper className={styles.backgroundCard}/>
         <div className={styles.layout}>
-          <UserCard user={user} />
+          <div className={styles.userCard}><UserCard user={user} /></div>
           <div className={styles.activty}>
             <RecentActivity user={user.id} userProfile />
           </div>

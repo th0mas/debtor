@@ -13,4 +13,12 @@
     display: inline-block;
     min-width: 500px;
   }
+
+  @media screen and (max-width: 992px) {
+    .card {
+      padding-top: 10px;
+      max-width: 100%;
+      min-width: 90%;
+    }
+  }
 }

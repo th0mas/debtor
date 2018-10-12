@@ -2,4 +2,13 @@
   .contentHolder {
     padding: 80px
   }
+
+  @media screen and (max-width: 992px) {
+    .contentHolder {
+      padding: 0px;
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 60px;
+    }
+  }
 }
