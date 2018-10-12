@@ -15,6 +15,19 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
     return users.filter(user => user.id === id)[0]
   }
 
+  const renderButtons = () => {
+    if (activity.paid) { return <Button variant='flat' disabled color='secondary'>PAID</Button> }
+
+    if (activity.creditor.id === currentUser) {
+      return <Button variant='contained' color='secondary' onClick={() => (saveDebt({ ...activity, paid: true }))}>Settle</Button>
+    } else if (activity.debtor.id === currentUser) {
+      return <Button variant='outlined' color='primary'>Pay</Button>
+    } else { // Unrelated to current user
+      return <Button variant='flat' disabled>OWED</Button>
+    }
+
+  }
+
   const debtor = getUser(activity.debtor.id)
   const creditor = getUser(activity.creditor.id)
   const textStyle = type === 'debt' ? styles.debtText : styles.creditText
@@ -24,8 +37,8 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
       <CardContent>
         <span className={styles.cardHeader}>
           <Chip label={debtor.id === currentUser ? 'You' : debtor.name} variant='outlined'
-            avatar={<UserAvatar user={debtor}/>} />
-          <h2 className={textStyle}> 
+            avatar={<UserAvatar user={debtor} />} />
+          <h2 className={textStyle}>
             {activity.paid
               ? <Tick />
               : <ForwardArrow />
@@ -37,12 +50,7 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
         <h1>£{(activity.amount / 100).toFixed(2)}</h1>
         <p>Interesting placeholder message.</p>
         <CardActions>
-          {activity.paid
-            ? <Button variant='flat' disabled color='secondary'>PAID</Button>
-            : type === 'debt'
-              ? <Button variant='outlined' color='primary'>Pay</Button>
-              : <Button variant='contained' color='secondary' onClick={() => (saveDebt({...activity, paid: true}))}>Settle</Button>
-          }
+          { renderButtons() }
         </CardActions>
       </CardContent>
     </Card>
