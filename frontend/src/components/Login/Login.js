@@ -13,19 +13,23 @@ export class Login extends React.PureComponent {
   loginUser = (e) => {
     e.preventDefault()
     this.props.loginUser(this.email.value, this.password.value)
-    const location = {
-      pathname: '/',
-      state: {
-        fromLogin: true
-      }
+      .then(this.componentDidUpdate())
+  }
+
+  componentDidUpdate() {
+    if (this.props.loginFailed) {
+      this.password.value = ''
     }
-    this.props.push(location)
   }
   render() {
     return (
       <div style={{textAlign: 'center'}}>
         <Card className={styles.card}>
           <CardContent>
+            { this.props.loginFailed
+              ? <p className={styles.loginFailText}>Username or password incorrect</p>
+              : null
+            }
             <form className={styles.formHolder} onSubmit={this.loginUser}>
               <FormControl className={styles.inputBox}>
                 <InputLabel htmlFor='email'>Email</InputLabel>

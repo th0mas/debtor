@@ -6,6 +6,8 @@ import {
 
 import { setApiToken } from '../api/api'
 
+import { setLoginFail } from '../ui/actions'
+
 import {
   loginUser as apiLoginUser,
   logoutUser as apiLogoutUser,
@@ -17,10 +19,14 @@ import { setCurrentUser, getAccounts } from '../accounts'
 import { store } from '../../store'
 
 export const loginUser = (username, password) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(requestLoginUser())
-    apiLoginUser(username, password)
-      .then((resp) => dispatch(recieveUserToken(resp.Authorization)))
+    return apiLoginUser(username, password)
+      .then((resp) => {
+        resp.error // Check if we were passed an error
+          ? dispatch(setLoginFail())
+          : dispatch(recieveUserToken(resp.Authorization))
+      })
       .then(() => dispatch(initUser([getAccounts])))
   }
 }

@@ -5,7 +5,8 @@ import { Login } from './Login'
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.entities.currentUser
+    currentUser: state.entities.currentUser,
+    loginFailed: state.ui.loginFailed
   }
 }
 

@@ -27,7 +27,7 @@ export const Base = ({ currentUser }) => {
           <Route exact path='/' render={() => {
             return currentUser ? <Redirect to='/recent' push /> : <Splash />
           }} />
-          <Route path='/login' component={Login} />
+          <Route path='/login' render={() => currentUser ? <Redirect to='/recent' push /> : <Login/>} />
           {loggedInRoutes}
         </Switch>
 

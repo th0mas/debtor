@@ -2,6 +2,11 @@
   .inputBox {
     width: 100%
   }
+
+  .loginFailText {
+    font-style: italic;
+    color: red;
+  }
   .formHolder {
     display: flex;
     flex-direction: column;
