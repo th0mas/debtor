@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Root from './components/Root'
 import {store, history} from './store'
 import init from './init'
+import { register as registerServiceWorker } from './serviceWorker'
 import './styles/main.scss'
 
 init(store)
@@ -24,3 +25,4 @@ if (module.hot) {
 }
 
 render() // Go go go!
+registerServiceWorker()
