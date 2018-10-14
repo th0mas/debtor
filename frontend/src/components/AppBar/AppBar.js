@@ -21,6 +21,7 @@ const AppBar = ({ currentUser, users }) => {
     return (
       <React.Fragment>
         <SearchBar />
+        <div className={styles.grow} />
         <UserAvatar user={getUserById(currentUser, users)} />
       </React.Fragment>
     )

@@ -18,12 +18,27 @@
         transition-property: border-radius, height;
         transition-duration: 0.2s;
         transition-timing-function: ease-out;
+        @media screen and (max-width: 992px) {
+            width: 2rem;
+            overflow: hidden;
+        }
+
         &:hover {
             background-color: adjust-color($color: $primary-light, $lightness: 5%)
         }
         &:focus-within {
             border-radius: 0px;
             align-self: stretch;
+
+            @media screen and (max-width: 992px) {
+                position: fixed;
+                width: 100%;
+                top: 0px;
+                left: 0px;
+                margin-left: 0px;
+                height: 56px;
+                z-index: 1;
+            }
         }
     }
     .search input {
@@ -41,4 +56,5 @@
         }
 
     }
+
 }

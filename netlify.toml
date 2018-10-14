@@ -4,7 +4,7 @@ ID = "infallible-babbage-fd9286"
 [build]
     base    = "frontend/"
     publish = "frontend/build/"
-    command = "yarn build"
+    command = "yarn run build-netlify"
 
 [[redirects]]
   from = "/*"

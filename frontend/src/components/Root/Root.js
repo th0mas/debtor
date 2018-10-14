@@ -17,7 +17,7 @@ const theme = createMuiTheme({
   }
 })
 
-const buildID = process.env.COMMIT_REF /* eslint no-undef: off */
+const buildID = process.env.REACT_APP_COMMIT_REF /* eslint no-undef: off */
 
 const Root = ({ store, history }) => {
   return (
