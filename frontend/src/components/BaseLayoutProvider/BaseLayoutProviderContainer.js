@@ -4,7 +4,8 @@ import {Base} from './BaseLayoutProvider'
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.entities.currentUser
+    currentUser: state.entities.currentUser,
+    foregroundOpen: state.ui.foregroundOpen
   }
 }
 

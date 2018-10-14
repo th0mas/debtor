@@ -27,7 +27,7 @@ export class RecentActivity extends React.PureComponent {
   }
 
   render() {
-    const classes = `${this.props.userProfile ? styles.userProfilePadding : null}`
+    const classes = `${this.props.userProfile ? styles.userProfilePadding : ''}`
     if (this.props.accounts.length > 0) {
       return (
         <div className={classes}>

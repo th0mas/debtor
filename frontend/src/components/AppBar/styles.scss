@@ -1,8 +1,10 @@
 @import '../../styles/_variables.scss';
-
 :local {
     .title {
         font-family: $title-font !important;
+        & a {color: #fff /* bun css */}
+    }
+    .grow {
         flex-grow: 1;
     }
 }

@@ -1,7 +1,9 @@
-import { TOGGLE_VIEW_ALL, UPDATE_DEBT_FORM_STATE, SET_LOGIN_FAIL, SET_LOGIN_SUCCESS } from './actions'
+import { TOGGLE_VIEW_ALL, UPDATE_DEBT_FORM_STATE, SET_LOGIN_FAIL, SET_LOGIN_SUCCESS, SET_FOREGROUND_CLOSED, SET_FOREGROUND_OPEN } from './actions'
 
 const initialUiState = {
   viewAll: false,
+  loginFailed: false,
+  foregroundOpen: false
 }
 
 export const UIReducer = (state = initialUiState, action) => {
@@ -14,6 +16,10 @@ export const UIReducer = (state = initialUiState, action) => {
     return Object.assign({}, state, {loginFailed: true})
   case SET_LOGIN_SUCCESS:
     return Object.assign({}, state, {loginFailed: false})
+  case SET_FOREGROUND_OPEN:
+    return Object.assign({}, state, {foregroundOpen: true})
+  case SET_FOREGROUND_CLOSED:
+    return Object.assign({}, state, {foregroundOpen: false})
   default:
     return state
   }

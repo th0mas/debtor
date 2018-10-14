@@ -1,15 +1,13 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import styles from './styles.scss'
-
 import Profile from '../Profile'
 import RecentActivity from '../RecentActivity'
 import Login from '../Login'
 import Debt from '../Debt'
 import Splash from '../Splash'
-export const Base = ({ currentUser }) => {
-  // This originally did more, and will probaly hold any additional routes
-  // or pages the app needs.
+export const Base = ({ currentUser, foregroundOpen }) => {
+  let globalStyles = Array(styles.contentHolder, foregroundOpen ? styles.blur : '')
 
   const loggedInRoutes = currentUser
     ?
@@ -20,14 +18,15 @@ export const Base = ({ currentUser }) => {
       <Route path='/user/:uuid(\d+)' component={Profile} />
     </Switch>
     : <Route path='/' render={() => <Redirect to='/' />} />
+
   return (
     <div>
-      <div className={[styles.contentHolder]}>
+      <div className={globalStyles.join(' ')}>
         <Switch>
           <Route exact path='/' render={() => {
             return currentUser ? <Redirect to='/recent' push /> : <Splash />
           }} />
-          <Route path='/login' render={() => currentUser ? <Redirect to='/recent' push /> : <Login/>} />
+          <Route path='/login' render={() => currentUser ? <Redirect to='/recent' push /> : <Login />} />
           {loggedInRoutes}
         </Switch>
 

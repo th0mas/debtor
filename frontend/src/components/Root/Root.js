@@ -9,13 +9,15 @@ import AppBar from '../AppBar'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: 'rgba(255, 102, 102, 1)'
+      main: '#ff5722'
     },
     secondary: {
       main: 'rgba(112, 174, 110, 1)'
     }
   }
 })
+
+const buildID = process.env.COMMIT_REF /* eslint no-undef: off */
 
 const Root = ({ store, history }) => {
   return (
@@ -24,6 +26,7 @@ const Root = ({ store, history }) => {
         <MuiThemeProvider theme={theme}>
           <AppBar />
           <BaseLayout />
+          <p style={{color: 'grey', fontStyle: 'italic', fontSize: '0.5rem'}}>BUILD ID: {buildID}</p>
         </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>
