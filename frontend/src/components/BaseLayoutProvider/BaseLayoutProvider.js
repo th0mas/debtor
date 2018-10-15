@@ -7,7 +7,7 @@ import Login from '../Login'
 import Debt from '../Debt'
 import Splash from '../Splash'
 export const Base = ({ currentUser, foregroundOpen }) => {
-  let globalStyles = Array(styles.contentHolder, foregroundOpen ? styles.blur : '')
+  let globalStyles = [styles.contentHolder, foregroundOpen ? styles.blur : '']
 
   const loggedInRoutes = currentUser
     ?

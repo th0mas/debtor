@@ -24,7 +24,7 @@ export class UserAvatar extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.user.id != this.props.user.id) {
+    if (prevProps.user.id !== this.props.user.id) {
       this.handleClose()
     }
   }
