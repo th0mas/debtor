@@ -7,7 +7,7 @@ import Chip from '@material-ui/core/Chip'
 import UserAvatar from '../UserAvatar'
 import ForwardArrow from '@material-ui/icons/ArrowForward'
 import Tick from '@material-ui/icons/Done'
-
+import { history } from '../../store'
 import styles from './styles.scss'
 
 export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) => {
@@ -28,6 +28,10 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
 
   }
 
+  const handleChipClick = (id) => {
+    history.push(`/user/${id}`)
+  }
+
   const debtor = getUser(activity.debtor.id)
   const creditor = getUser(activity.creditor.id)
   const textStyle = type === 'debt' ? styles.debtText : styles.creditText
@@ -37,7 +41,7 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
       <CardContent>
         <span className={styles.cardHeader}>
           <Chip label={debtor.id === currentUser ? 'You' : debtor.name} variant='outlined'
-            avatar={<UserAvatar user={debtor} />} />
+            avatar={<UserAvatar user={debtor} noPopUp/>} onClick={() => handleChipClick(debtor.id)}/>
           <h2 className={textStyle}>
             {activity.paid
               ? <Tick />
@@ -45,7 +49,7 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
             }
           </h2>
           <Chip label={creditor.id === currentUser ? 'You' : creditor.name} variant='outlined'
-            avatar={<UserAvatar user={creditor} />} />
+            avatar={<UserAvatar user={creditor} noPopUp/>} onClick={() => handleChipClick(creditor.id)}/>
         </span>
         <h1>£{(activity.amount / 100).toFixed(2)}</h1>
         <p>Interesting placeholder message.</p>

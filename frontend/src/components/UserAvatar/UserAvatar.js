@@ -39,24 +39,26 @@ export class UserAvatar extends React.Component {
           onClick={this.handleClick}
           src={this.props.user.profile_img}
         ></Avatar>
+        { this.props.noPopUp
+          ? null
+          : <Popover
+            id="user-popper"
+            open={open}
+            onClose={this.handleClose}
+            anchorEl={anchor}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
 
-        <Popover
-          id="user-popper"
-          open={open}
-          onClose={this.handleClose}
-          anchorEl={anchor}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          
-        >
-          <UserCard user={this.props.user}/>
-        </Popover>
+          >
+            <UserCard user={this.props.user} />
+          </Popover>
+        }
       </div>
     )
   }
