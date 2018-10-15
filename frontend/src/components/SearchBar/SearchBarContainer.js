@@ -5,7 +5,7 @@ import {setForegroundOpen, setForegroundClosed} from '../../services/ui/actions'
 
 const mapStateToProps = (state) => {
   return {
-    users: state.entities.users,
+    users: state.entities.accounts,
     debts: state.entities.debts,
   }
 }

@@ -1,8 +1,15 @@
 import React from 'react'
+import { history } from '../../store'
 import SearchIcon from '@material-ui/icons/Search'
 import Input from '@material-ui/core/Input'
 import Popper from '@material-ui/core/Popper'
 import Paper from '@material-ui/core/Paper'
+
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Button from '@material-ui/core/Button'
+import Divider from '@material-ui/core/Divider'
 
 import styles from './styles.scss'
 export class SearchBar extends React.Component {
@@ -17,11 +24,19 @@ export class SearchBar extends React.Component {
     this.props.setForegroundOpen()
   }
 
-  handleLoss = () => {
+  handleLoss = (event) => {
+    this.props.setForegroundClosed()
+    event.preventDefault()
+    this.setState({
+      anchor: null,
+      searchText: ''
+    })
+  }
+
+  handleClose = () => {
     this.setState({
       anchor: null
     })
-    this.props.setForegroundClosed()
   }
 
   handleChange = (e) => {
@@ -29,6 +44,12 @@ export class SearchBar extends React.Component {
       searchText: e.target.value
     })
   }
+
+  getSearchResults = (query) => {
+    const res = this.props.users.filter(user => user.name.toLowerCase().includes(query.toLowerCase()) || user.email.includes(query))
+    return res
+  }
+
   render() {
     const anchor = this.state.anchor
     const open = Boolean(anchor)
@@ -49,7 +70,7 @@ export class SearchBar extends React.Component {
           <Popper
             id='search-popper'
             open={open}
-            onClose={this.handleLoss}
+            onClose={this.handleClose}
             anchorEl={anchor}
             placement='bottom-start'
             disablePortal
@@ -57,7 +78,21 @@ export class SearchBar extends React.Component {
           >
             <Paper className={styles.resultsPaper}>
               <div className={styles.resultsHolder}>
-                <h2>{ this.state.searchText }</h2>
+                <List>
+                  {this.state.searchText.length > 0
+                    ? this.getSearchResults(this.state.searchText).map(item => {
+                      return (
+                        <div key={item.id}>
+                          <Divider />
+                          <ListItem onMouseDown={() => { history.push(`/user/${item.id}`) }} style={{ cursor: 'pointer' }}>
+                            <ListItemText>{item.name}</ListItemText>
+                          </ListItem>
+                        </div>
+                      )
+                    })
+                    : <p>Start typing to search</p>
+                  }
+                </List>
               </div>
             </Paper>
           </Popper>

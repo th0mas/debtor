@@ -46,6 +46,7 @@ export const logoutUser = () => {
     apiLogoutUser()
       .then(() => dispatch(recieveUserToken('')))
       .then(() => dispatch(setCurrentUser(0)))
+      .then(() => location.reload()) /* eslint no-restricted-globals: ["off", "location"] */
   }
 }
 
