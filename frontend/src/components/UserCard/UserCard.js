@@ -32,6 +32,7 @@ export const UserCard = ({ user, currentUser, push, logoutUser }) => {
       <CardMedia
         component="img"
         src={user.profile_img}
+        className={styles.cardImg}
         height="100%" />
       <CardContent className={styles.cardHeader}>
         <h1><Link to={`/user/${user.id}`} className={styles.userLink}>{user.name}</Link></h1>
