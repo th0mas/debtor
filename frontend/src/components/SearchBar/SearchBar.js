@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 
 import styles from './styles.scss'
+import { underline } from 'ansi-colors';
 export class SearchBar extends React.Component {
   constructor(props) {
     super(props)
@@ -32,26 +33,32 @@ export class SearchBar extends React.Component {
     })
   }
 
-  handleClose = () => {
-    this.setState({
-      anchor: null
-    })
-  }
-
   handleChange = (e) => {
     this.setState({
       searchText: e.target.value
     })
   }
 
+  handleKey = (event, result) => {
+    if (event.keyCode === 13 && result) {
+      // Enter has been clicked
+      // double check there is actually a result bc spaghetti TODO: Fix
+      history.push(`/user/${result.id}`)
+      event.target.blur()
+    }
+  }
+
   getSearchResults = (query) => {
-    const res = this.props.users.filter(user => user.name.toLowerCase().includes(query.toLowerCase()) || user.email.includes(query))
+    const res = query 
+      ? this.props.users.filter(user => user.name.toLowerCase().includes(query.toLowerCase()) || user.email.includes(query))
+      : []
     return res
   }
 
   render() {
     const anchor = this.state.anchor
     const open = Boolean(anchor)
+    const results = this.getSearchResults(this.state.searchText)
     return (
       <div className={styles.search}>
         <div className={styles.searchIcon}>
@@ -64,12 +71,13 @@ export class SearchBar extends React.Component {
             onFocus={this.handleFocus}
             onBlur={this.handleLoss}
             onChange={this.handleChange}
+            onKeyUp={(event) => this.handleKey(event, results[0])}
             value={this.state.searchText}
           />
           <Popper
             id='search-popper'
             open={open}
-            onClose={this.handleClose}
+            onClose={this.handleLoss}
             anchorEl={anchor}
             placement='bottom-start'
             disablePortal
@@ -79,7 +87,7 @@ export class SearchBar extends React.Component {
               <div className={styles.resultsHolder}>
                 <List>
                   {this.state.searchText.length > 0
-                    ? this.getSearchResults(this.state.searchText).map(item => {
+                    ? results.map(item => {
                       return (
                         <div key={item.id}>
                           <Divider />

@@ -13,7 +13,7 @@ import styles from './styles.scss'
 const submitDebt = (event, debt, debtor, creditor, push, saveDebt) => {
   event.preventDefault()
   let newDebt = {...debt, ...{creditor_id: creditor, debtor_id:debtor}}
-  newDebt.amount = Math.floor(parseFloat(newDebt.amount) * 100)
+  newDebt.amount = parseInt(newDebt.amount.replace('.', ''))
   saveDebt(newDebt)
   push('/recent')
 }
