@@ -14,5 +14,5 @@ jobs:
       - run:
           command: "git remote add dokku dokku@ssh.tomhaines.xyz:debtor"
       - deploy:
-          command: "git subtree push --prefix backend dokku master"
+          command: "git subtree push --prefix --force backend dokku master"
   
