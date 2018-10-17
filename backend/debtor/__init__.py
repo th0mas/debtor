@@ -10,6 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
+from flask_migrate import Migrate
 import os
 import jwt
 
@@ -20,8 +21,9 @@ app.secret_key = os.environ.get("FLASK_APP_SECRET_KEY")
 # Initialize the Database.
 # This creates a database object that is used to declare models 
 # and open a connection to the database with each http(s) connection
-app.config["SQLALCHEMY_DATABASE_URI"]: str = "sqlite:///devdb.db"
+app.config["SQLALCHEMY_DATABASE_URI"]: str = "sqlite:///../devdb.db"
 db: SQLAlchemy = SQLAlchemy(app)
+migrate: Migrate = Migrate(app, db)
 
 # Initialize hashing function
 bcrypt: Bcrypt = Bcrypt(app)

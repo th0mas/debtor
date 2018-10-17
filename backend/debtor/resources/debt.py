@@ -13,6 +13,7 @@ resource_fields = {
     "id": fields.Integer,
     "time_created": fields.DateTime,
     "amount": fields.Integer,
+    "description": fields.String,
     "debtor": fields.Nested(user_id),
     "creditor": fields.Nested(user_id),
     "paid": fields.Boolean
@@ -24,6 +25,7 @@ parser.add_argument("debtor", type=dict)
 parser.add_argument("creditor_id", type=int) # TODO: Fix this in FE
 parser.add_argument("debtor_id", type=int)
 parser.add_argument("creditor", type=dict)
+parser.add_argument('description', type=str)
 parser.add_argument("paid", type=bool)
 
 
@@ -48,8 +50,6 @@ class Debts(Resource):
             .first_or_404()
         paid = args["paid"]
 
-        # Only the creditor should be able to change the debt status
-        print(args)
         if paid and current_user.id == args.get('creditor').get('id'):
             debt.paid = paid
 
@@ -82,6 +82,7 @@ class DebtList(Resource):
         args = parser.parse_args()
         debt = Debt(
             args["amount"],
+            args["description"],
             User.query.get(args["debtor_id"]),
             User.query.get(args["creditor_id"])
         )

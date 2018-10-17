@@ -127,10 +127,13 @@ class Debt(db.Model):
 
     creditor_id = db.Column(db.Integer, db.ForeignKey('user.id'),
                             nullable=False)
+
+    description = db.Column(db.String(200))
     
     paid = db.Column(db.Boolean, default=False)
 
-    def __init__(self, amount, debtor, creditor):
+    def __init__(self, amount, description, debtor, creditor):
         self.amount = amount
+        self.description = description
         self.debtor = debtor
         self.creditor = creditor

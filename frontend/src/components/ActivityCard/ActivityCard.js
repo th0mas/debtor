@@ -52,7 +52,7 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
             avatar={<UserAvatar user={creditor} noPopUp/>} onClick={() => handleChipClick(creditor.id)}/>
         </span>
         <h1>£{(activity.amount / 100).toFixed(2)}</h1>
-        <p>Interesting placeholder message.</p>
+        <p>{ activity.description ? activity.description : <i>No description provided</i> }</p>
         <CardActions>
           { renderButtons() }
         </CardActions>
