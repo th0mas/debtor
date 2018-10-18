@@ -64,7 +64,7 @@ class User(db.Model, UserMixin):
     
     def create_jwt(self):
         payload = {
-            'exp': datetime.utcnow() + timedelta(days=1, seconds=5),
+            'exp': datetime.utcnow() + timedelta(weeks=1),
             'iat': datetime.utcnow(),
             'user': self.id
         }

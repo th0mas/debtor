@@ -74,6 +74,7 @@ class UsersList(Resource):
 
     @marshal_with(resource_fields)
     def post(self):
+        # TODO: Refractor this
         args = parser.parse_args()
 
         user = User(
@@ -82,6 +83,8 @@ class UsersList(Resource):
             args['password'],
             args['color']
         )
+
+        user.profile_img = args.get('profile_img')
 
         db.session.add(user)
         db.session.commit()
