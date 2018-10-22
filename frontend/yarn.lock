@@ -895,6 +895,53 @@
     "@babel/runtime" "7.0.0-rc.1"
     recompose "^0.28.0"
 
+"@sentry/browser@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-4.2.0.tgz#022c47682a18c3334db166fa5419766420cc2ba7"
+  integrity sha512-nMDHNSNNNEdw6KZeYlzFVByXRNrCBuX9JHpz6xFHByTgYk8tiz+d33UMSvJI24rOfCyIw/S2iUJpc9GccyRq8w==
+  dependencies:
+    "@sentry/core" "4.2.0"
+    "@sentry/types" "4.2.0"
+    "@sentry/utils" "4.2.0"
+
+"@sentry/core@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.2.0.tgz#a8d0536a2c97b0d90c35963f55d60d5003711d28"
+  integrity sha512-gxvtuFrBjPUuTuiLIYT8ZfXD7Qfu8GfZ0zGh5EMPQRAYnf++Eq8ACW9I3yktEsq2Tfp7WKsCM0g7/hRYUu7Bxg==
+  dependencies:
+    "@sentry/hub" "4.2.0"
+    "@sentry/minimal" "4.2.0"
+    "@sentry/types" "4.2.0"
+    "@sentry/utils" "4.2.0"
+
+"@sentry/hub@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.2.0.tgz#26060a6d87c00810dcade3f9a17924b2c910d42a"
+  integrity sha512-EzcQGkAyzB89RIqv/tLwYcKvdje/vcdreIy5CAN00+CQqJPiRHQDARvXJUE6D1R56NRCr4p/ZhhM8A+2oIFrKA==
+  dependencies:
+    "@sentry/types" "4.2.0"
+    "@sentry/utils" "4.2.0"
+
+"@sentry/minimal@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.2.0.tgz#98f7030c042458e5cdb2dd063623f6c28aa98b6d"
+  integrity sha512-/pA3GA5y4Rk8cxNrIGUopuZwyGV5RvWyke5nyCijjYlu8vI2l/yl0nP+kQ+tHvjCJf95Q6zAPO6I1chA79BIYQ==
+  dependencies:
+    "@sentry/hub" "4.2.0"
+    "@sentry/types" "4.2.0"
+
+"@sentry/types@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-4.2.0.tgz#716310e9ec5c8d345a3d4422a7d19298ae57c158"
+  integrity sha512-UjOSfPdAyZjacjomdF2VZLCGkP3+zU/8eP/EO1q1jC4bBQbjx+i2Tue+ukH4pkjcpldq/l87oHbrXCY83a/cYA==
+
+"@sentry/utils@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.2.0.tgz#a93621cc718302cb57c38ac2befde5d1091606d2"
+  integrity sha512-NokXZ8wiuGowwr86VjaTcpo5NEtgzMWMYPDrwcbL7YBeOLS525AETw/uYc4FW4zq3YUgmLqqjeBclOPT+LSXUQ==
+  dependencies:
+    "@sentry/types" "4.2.0"
+
 "@svgr/core@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-2.4.1.tgz#03a407c28c4a1d84305ae95021e8eabfda8fa731"

@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import * as Sentry from '@sentry/browser'
 import Root from './components/Root'
 import {store, history} from './store'
 import init from './init'
@@ -9,6 +10,8 @@ import './styles/main.scss'
 init(store)
 
 const MOUNT_NODE = document.getElementById('root')
+
+Sentry.init({dsn: 'https://e5a97adb1e3d4d42ac5a47e5a57f7a13@sentry.io/1306339'})
 
 let render = () => {
   ReactDOM.render(
