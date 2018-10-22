@@ -11,7 +11,10 @@ init(store)
 
 const MOUNT_NODE = document.getElementById('root')
 
-Sentry.init({dsn: 'https://e5a97adb1e3d4d42ac5a47e5a57f7a13@sentry.io/1306339'})
+Sentry.init({
+  dsn: 'https://e5a97adb1e3d4d42ac5a47e5a57f7a13@sentry.io/1306339',
+  release: process.env.REACT_APP_COMMIT_REF
+})
 
 let render = () => {
   ReactDOM.render(
