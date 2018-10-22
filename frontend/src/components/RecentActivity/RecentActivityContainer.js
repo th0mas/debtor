@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getAccounts, getAccount } from '../../services/accounts'
 import { getDebts } from '../../services/debts'
 import { toggleViewAll } from '../../services/ui'
+import { setSortBy } from '../../services/ui/actions'
 import { RecentActivity } from './RecentActivity'
 
 const mapStateToProps = (state) => {
@@ -10,7 +11,8 @@ const mapStateToProps = (state) => {
     currentUser: state.entities.currentUser,
     accounts: state.entities.accounts,
     debts: state.entities.debts,
-    viewAll: state.ui.viewAll
+    viewAll: state.ui.viewAll,
+    sortBy: state.ui.sortBy
   }
 }
 
@@ -19,7 +21,8 @@ const mapDispatchToProps = (dispatch) => {
     getAccounts: () => dispatch(getAccounts()),
     getAccount: () => dispatch(getAccount()),
     getDebts: (id = null) => dispatch(getDebts(id)),
-    toggleViewAll: () => dispatch(toggleViewAll())
+    toggleViewAll: () => dispatch(toggleViewAll()),
+    setSortBy: (sortBy) => dispatch(setSortBy(sortBy))
   }
 }
 

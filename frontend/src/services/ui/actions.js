@@ -4,6 +4,7 @@ export const SET_LOGIN_FAIL = 'SET_LOGIN_FAIL'
 export const SET_LOGIN_SUCCESS = 'SET_LOGIN_SUCCESS'
 export const SET_FOREGROUND_OPEN = 'SET_FOREGROUND_OPEN'
 export const SET_FOREGROUND_CLOSED = 'SET_FOREGROUND_CLOSED'
+export const SET_SORT_BY = 'SET_SORT_BY'
 
 export const toggleViewAll = () => ({
   type: TOGGLE_VIEW_ALL
@@ -30,4 +31,11 @@ export const setForegroundOpen = () =>({
 
 export const setForegroundClosed = () => ({
   type: SET_FOREGROUND_CLOSED
+})
+
+export const setSortBy = (sortBy) => ({
+  type: SET_SORT_BY,
+  payload: {
+    sortBy
+  }
 })

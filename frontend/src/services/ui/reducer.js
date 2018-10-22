@@ -1,9 +1,10 @@
-import { TOGGLE_VIEW_ALL, UPDATE_DEBT_FORM_STATE, SET_LOGIN_FAIL, SET_LOGIN_SUCCESS, SET_FOREGROUND_CLOSED, SET_FOREGROUND_OPEN } from './actions'
+import { TOGGLE_VIEW_ALL, UPDATE_DEBT_FORM_STATE, SET_LOGIN_FAIL, SET_LOGIN_SUCCESS, SET_FOREGROUND_CLOSED, SET_FOREGROUND_OPEN, SET_SORT_BY } from './actions'
 
 const initialUiState = {
   viewAll: false,
   loginFailed: false,
-  foregroundOpen: false
+  foregroundOpen: false,
+  sortBy: 'amount'
 }
 
 export const UIReducer = (state = initialUiState, action) => {
@@ -20,6 +21,8 @@ export const UIReducer = (state = initialUiState, action) => {
     return Object.assign({}, state, {foregroundOpen: true})
   case SET_FOREGROUND_CLOSED:
     return Object.assign({}, state, {foregroundOpen: false})
+  case SET_SORT_BY:
+    return Object.assign({}, state, { sortBy: action.payload.sortBy})
   default:
     return state
   }

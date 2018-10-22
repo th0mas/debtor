@@ -2,6 +2,7 @@ import React from 'react'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import ActivityCard from '../ActivityCard'
+import { SortBySelect } from './SortBy'
 import { TopBar } from './TopBar'
 
 import styles from './styles.scss'
@@ -10,7 +11,6 @@ export class RecentActivity extends React.PureComponent {
   componentDidMount() {
     this.props.getDebts(this.props.user)
   }
-
 
   getDebts(all = false) {
     let debts = all
@@ -25,6 +25,31 @@ export class RecentActivity extends React.PureComponent {
     return credits
 
   }
+  merge = (left, right, attr) => {
+    let result = []
+    while (left.length && right.length) {
+      if (left[0][attr] >= right[0][attr]){
+        result.push(left.shift())
+      } else {
+        result.push(right.shift())
+      }
+    }
+
+    while (left.length) result.push(left.shift())
+    while (right.length) result.push(right.shift())
+    return result
+
+  }
+  mergeSort(items, attr) {
+    if (items.length < 2) {
+      return items
+    }
+
+    let middle = parseInt(items.length / 2)
+    let left = items.slice(0, middle)
+    let right = items.slice(middle, items.length)
+    return this.merge(this.mergeSort(left, attr), this.mergeSort(right, attr), attr)
+  }
 
   render() {
     const classes = `${this.props.userProfile ? styles.userProfilePadding : ''}`
@@ -32,8 +57,8 @@ export class RecentActivity extends React.PureComponent {
       return (
         <div className={classes}>
           <TopBar debts={this.getDebts()} credits={this.getCredits()} />
-
           <div className={styles.toggleSlider}>
+            <SortBySelect sortBy={this.props.sortBy} setSortBy={this.props.setSortBy} />
             <FormControlLabel
               control={
                 <Switch
@@ -48,10 +73,10 @@ export class RecentActivity extends React.PureComponent {
           <div className={styles.activityHolder}>
 
             <div className={styles.activityList}>
-              {this.getDebts(this.props.viewAll).map((debt, i) => <ActivityCard activity={debt} type={'debt'} key={i} />)}
+              {this.mergeSort(this.getDebts(this.props.viewAll), this.props.sortBy).map((debt) => <ActivityCard activity={debt} type={'debt'} key={debt.id} />)}
             </div>
             <div className={styles.activityList}>
-              {this.getCredits(this.props.viewAll).map((credit, i) => <ActivityCard activity={credit} type={'credit'} key={i} />)}
+              {this.mergeSort(this.getCredits(this.props.viewAll), this.props.sortBy).map((credit) => <ActivityCard activity={credit} type={'credit'} key={credit.id} />)}
             </div>
           </div>
         </div>
