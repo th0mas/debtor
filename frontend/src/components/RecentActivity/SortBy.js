@@ -20,7 +20,7 @@ export const SortBySelect = ({ sortBy, setSortBy }) => {
           />
         }
       >
-        <Menuitem value={'created'}>Date created</Menuitem>
+        <Menuitem value={'time_created'}>Date created</Menuitem>
         <Menuitem value={'amount'}>Amount Owed</Menuitem>
         <Menuitem value={'name'}>Name</Menuitem>
       </Select>

@@ -19,7 +19,7 @@ export const getDebts = (id) => {
     dispatch(requestDebts())
     apiGetDebts(id)
       .then((response) => {
-        response = response.map(debt => Object.assign({}, debt, {time_created: new Date(debt.time_created).value}))
+        response = response.map(debt => Object.assign({}, debt, {time_created: new Date(debt.time_created)}))
         dispatch(receiveDebts(response))
       })
       .catch((response) => console.log(`RIP ${response}`))
