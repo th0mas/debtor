@@ -16,10 +16,17 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
   }
 
   const renderButtons = () => {
-    if (activity.paid) { return <Button variant='flat' disabled color='secondary'>PAID</Button> }
+    if (activity.paid) { 
+      return <Button variant='flat' disabled color='secondary'>PAID</Button> 
+    }
 
     if (activity.creditor.id === currentUser) {
-      return <Button variant='contained' color='secondary' onClick={() => (saveDebt({ ...activity, paid: true }))}>Settle</Button>
+      return <Button 
+        variant='contained' 
+        color='secondary' 
+        onClick={() => (saveDebt({ ...activity, paid: true }))}>
+          Settle
+      </Button>
     } else if (activity.debtor.id === currentUser) {
       return <Button variant='outlined' color='primary'>Pay</Button>
     } else { // Unrelated to current user
@@ -41,7 +48,8 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
       <CardContent>
         <span className={styles.cardHeader}>
           <Chip label={debtor.id === currentUser ? 'You' : debtor.name} variant='outlined'
-            avatar={<UserAvatar user={debtor} noPopUp/>} onClick={() => handleChipClick(debtor.id)}/>
+            avatar={<UserAvatar user={debtor} noPopUp/>} 
+            onClick={() => handleChipClick(debtor.id)}/>
           <h2 className={textStyle}>
             {activity.paid
               ? <Tick />
@@ -49,7 +57,8 @@ export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) =
             }
           </h2>
           <Chip label={creditor.id === currentUser ? 'You' : creditor.name} variant='outlined'
-            avatar={<UserAvatar user={creditor} noPopUp/>} onClick={() => handleChipClick(creditor.id)}/>
+            avatar={<UserAvatar user={creditor} noPopUp/>} 
+            onClick={() => handleChipClick(creditor.id)}/>
         </span>
         <h1>£{(activity.amount / 100).toFixed(2)}</h1>
         <p>{ activity.description ? activity.description : <i>No description provided</i> }</p>

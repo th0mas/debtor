@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 
 import styles from './styles.scss'
-import { underline } from 'ansi-colors';
+
 export class SearchBar extends React.Component {
   constructor(props) {
     super(props)

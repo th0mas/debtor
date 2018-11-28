@@ -1,4 +1,7 @@
-// In production, we register a service worker to serve assets from local cache.
+// MIT License
+// Copyright (c) 2013-present, Facebook, Inc.
+//
+// https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/src/serviceWorker.js
 
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)

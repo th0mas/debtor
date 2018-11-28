@@ -45,9 +45,10 @@
   }
 
   .sortBy {
-    min-width: 120px;
+    min-width: 120px !important;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 20px;
+    margin-right: 10px;
   }
     
 }

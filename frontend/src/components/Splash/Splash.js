@@ -10,6 +10,7 @@ export const Splash = () => {
       <h1 className={styles.title}>Make lending money easy - and fun.</h1>
       <div className={styles.loginButtonContainer}>
         <Button variant='outlined'><Link to='/login'>Login</Link></Button>
+        <p>No account? <span style={{textDecoration: 'underline'}}><Link to='/create'>Create one</Link></span></p>
       </div>
     </div>
   )

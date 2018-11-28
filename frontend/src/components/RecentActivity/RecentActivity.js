@@ -34,10 +34,9 @@ export class RecentActivity extends React.PureComponent {
         result.push(right.shift())
       }
     }
-
-    while (left.length) result.push(left.shift())
-    while (right.length) result.push(right.shift())
-    return result
+    // while (left.length) result.push(left.shift())
+    // while (right.length) result.push(right.shift())
+    return result.concat(left).concat(right)
 
   }
   mergeSort(items, attr) {

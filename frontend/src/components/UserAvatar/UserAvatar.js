@@ -22,7 +22,11 @@ export class UserAvatar extends React.Component {
       anchor: null,
     })
   }
-
+  // For performance reasons, this will be kept alive
+  // between pages and then updated with new user details.
+  // If we've moved profiles then this would be updated to show the new
+  // user's profile popup, which we don't want so we'll gracefully
+  // close here
   componentDidUpdate(prevProps) {
     if (prevProps.user.id !== this.props.user.id) {
       this.handleClose()

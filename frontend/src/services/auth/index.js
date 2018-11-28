@@ -18,6 +18,13 @@ import { setCurrentUser, getAccounts } from '../accounts'
 
 import { store } from '../../store'
 
+const decodeJWT = (token) => {
+  let base64UrlSafe = token.split('.')[1]
+  let base64 = base64UrlSafe.replace(/-/g, '+').replace(/_/g, '/')
+  let decocdedToken = JSON.parse(atob(base64))
+  return decocdedToken
+}
+
 export const loginUser = (username, password) => {
   return async (dispatch) => {
     dispatch(requestLoginUser())
@@ -68,9 +75,3 @@ export const handleAuthError = () => {
   store.dispatch(setCurrentUser(0))
 }
 
-const decodeJWT = (token) => {
-  let base64UrlSafe = token.split('.')[1]
-  let base64 = base64UrlSafe.replace(/-/g, '+').replace(/_/g, '/')
-  let decocdedToken = JSON.parse(atob(base64))
-  return decocdedToken
-}

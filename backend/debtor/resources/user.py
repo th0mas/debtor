@@ -30,7 +30,7 @@ parser.add_argument("password", type=str)
 
 class Users(Resource):
     """
-    Endpoint for /user/:id
+    Allows fetching and editing of induvidual users
     """
 
     method_decorators=[login_required]
@@ -38,19 +38,33 @@ class Users(Resource):
 
     @marshal_with(resource_fields)
     def get(self, id):
+        """
+        Gets an induvidual users infomation
+        """
         return User.query.filter_by(id=id) \
             .first_or_404()
 
     @marshal_with(resource_fields)
     def put(self, id):
+        """
+        Update a single user by ID
+        """
         args = parser.parse_args()
         user = User.query.filter_by(id=id) \
             .first_or_404()
 
+        # Creates a generator
+        # Returns the request argument if the argument exists in the argument dictionary
+        # Required as flask-restful sets null values to `None` instead of omitting
+        # them completely. 
         updated_fields = (arg for arg in args if args[arg])
 
+        # Then iterate through updated fields and update these on the user
+        # object using polymorphism.
         for field in updated_fields:
             setattr(user, field, args[field])
+
+        # Commit changes to the database
         db.session.add(user)
         db.session.commit()
 

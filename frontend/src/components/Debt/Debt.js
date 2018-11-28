@@ -27,16 +27,18 @@ export const Debt = ({ users, debt, push, saveDebt, updateDebtState, match }) =>
     const debtorUserID = parseInt(match.params.debtor)
     const creditorUserID = parseInt(match.params.creditor)
 
-    // Haha oh no
     
     return (
       <Card className={styles.debtCard} style={{flexDirection: 'row'}}>
         <CardContent>
           <h2>Add Debt </h2>
           <div className={styles.avatarHolder}>
-            <UserAvatar user={getUserById(debtorUserID, users)} /> <Arrow className={styles.arrow}/> <UserAvatar user={getUserById(creditorUserID, users)} />
+            <UserAvatar user={getUserById(debtorUserID, users)} /> 
+            <Arrow className={styles.arrow}/> 
+            <UserAvatar user={getUserById(creditorUserID, users)} />
           </div>
-          <form className={styles.formHolder} onSubmit={(e) => (submitDebt(e, debt, debtorUserID, creditorUserID, push, saveDebt))}>
+          <form className={styles.formHolder} 
+            onSubmit={(e) => (submitDebt(e, debt, debtorUserID, creditorUserID, push, saveDebt))}>
             <TextField
               label='Amount'
               id='amount'

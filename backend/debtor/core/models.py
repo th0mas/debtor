@@ -34,6 +34,8 @@ class User(db.Model, UserMixin):
     owed = db.relationship('Debt', backref="creditor", lazy=True,
                            foreign_keys='Debt.creditor_id')
 
+    pools = db.relationship('Pool', backref="owner", lazy=True)
+
     def __init__(self, name, email, password, color="default"):
         self.name = name
         self.email = email
@@ -43,10 +45,19 @@ class User(db.Model, UserMixin):
 
     @property
     def password(self) -> bytes:
+        """Returns the byte representation of the hashed password"""
         return self._password
 
     @password.setter
     def password(self, password):
+        """
+        Saves the password as a hashed representation of itself using
+        the `create_password_hash()` function.
+
+        Used to provide a shortcut and prevent the password being accidentlally set in
+        plaintext.
+        Sets the hashed representation to a hidden field.
+        """
         self._password = self.create_password_hash(password)
 
     def create_password_hash(self, password) -> bytes:
@@ -63,11 +74,17 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password, password)
     
     def create_jwt(self):
+        """
+        Creates a signed JSON Web token for the User.
+        Tokens are unuque to each yser and expire in one week.
+        """
         payload = {
             'exp': datetime.utcnow() + timedelta(weeks=1),
             'iat': datetime.utcnow(),
             'user': self.id
         }
+
+        # Encode the token using the payload and the H256 algorithm
         return jwt.encode(
             payload,
             app.secret_key,
@@ -76,6 +93,10 @@ class User(db.Model, UserMixin):
 
     @staticmethod  
     def decode_auth_token(auth_token):
+        """
+        Decodes the authorization token and return the User it corresponds to.
+        If the token is not valid or incorrect it will return an error
+        """
         try:
             payload = jwt.decode(auth_token, app.secret_key)
             is_blacklisted_token = BlacklistToken.verify_token_blacklist(auth_token)
@@ -128,6 +149,9 @@ class Debt(db.Model):
     creditor_id = db.Column(db.Integer, db.ForeignKey('user.id'),
                             nullable=False)
 
+    pool_id = db.Column(db.Integer, db.ForeignKey('pool.id'),
+                            nullable=True) # Pools is optional
+
     description = db.Column(db.String(200))
     
     paid = db.Column(db.Boolean, default=False)
@@ -137,3 +161,9 @@ class Debt(db.Model):
         self.description = description
         self.debtor = debtor
         self.creditor = creditor
+
+class Pool(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    associated_debts = db.relationship('Debt', backref='pool', lazy=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
