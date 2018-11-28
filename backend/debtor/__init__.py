@@ -21,7 +21,7 @@ app.secret_key = os.environ.get("FLASK_APP_SECRET_KEY")
 # Initialize the Database.
 # This creates a database object that is used to declare models 
 # and open a connection to the database with each http(s) connection
-app.config["SQLALCHEMY_DATABASE_URI"]: str = "sqlite:///../devdb.db"
+app.config["SQLALCHEMY_DATABASE_URI"]: str = os.environ.get("DATABASE_URL")
 db: SQLAlchemy = SQLAlchemy(app)
 migrate: Migrate = Migrate(app, db)
 
