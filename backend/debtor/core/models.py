@@ -167,3 +167,8 @@ class Pool(db.Model):
     
     associated_debts = db.relationship('Debt', backref='pool', lazy=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, owner, *associated_debts):
+        self.associated_debts = [*associated_debts]
+        self.owner = owner
+        

@@ -1,7 +1,8 @@
 from flask_restful import (Resource, fields, marshal_with, marshal_with_field, reqparse)
 
 from flask_login import current_user, login_required
-from debtor.core.models import User, Debt, Pool
+from sqlalchemy import or_
+from debtor.core.models import User, Debt, Pool 
 
 from debtor import db
 
@@ -21,7 +22,7 @@ parser.add_argument("owner", type=int)
 parser.add_argument("amount", type=int)
 parser.add_argument("description", type=str)
 
-class Pool(Resource):
+class Pools(Resource):
     """
     The Pools resource allows groups of debts to be created
     together and manipulated as `pools`. 
@@ -45,7 +46,7 @@ class Pool(Resource):
 
         return pool
 
-class PoolList(Resource):
+class PoolsList(Resource):
     """
     Returns a list of pools 
     """
@@ -53,25 +54,37 @@ class PoolList(Resource):
 
     @marshal_with_field(fields.List(fields.Nested(resource_fields)))
     def get(self):
-        return Pool.query.join(Debt).filter(Debt.debtor_id == current_user)
+        # Generate a phat query
+        return Pool.query.join(Debt).filter(
+            or_(Debt.debtor == current_user, Pool.owner == current_user)
+        )
 
+    # TODO: Fix this mess
     @marshal_with(resource_fields)  
     def post(self):
+        # Get required attributes from http request
         args = parser.parse_args()
         amount = args["amount"]
         owner = args["owner"]
         description = (args["description"] if args["description"] else f"Pooled debt for {current_user.name}")
 
+        new_debts = []
         # Args
         for user_id in args["users"]:
             debt = Debt(
                 amount,
                 description,
-                User.query.get(user_id),
-                current_user
+                User.query.get(user_id), # Error 500 if returns none
+                current_user             # Need to verify user exists
             )
             db.session.add(debt)
-        
+            new_debts.append(debt)
+
+        # Create the pool with the newly created debts    
+        pool = Pool(
+            current_user,
+            *new_debts # Expand the debts using the `*` operator
+        )
         db.session.commit()
-        return args["users"]
+        return pool
             
