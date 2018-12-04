@@ -36,7 +36,7 @@ export const TopBar = ({debts, credits, pools}) => {
         <h3>POOLS</h3>
         {
           pools.map((pool) => {
-            return <p key={pool.id}>{pool.id}</p>
+            return <p key={pool.id}>{pool.id}: Money owed to: {pool.owner.id}</p>
           })
         }
       </div>

@@ -8,11 +8,11 @@ import Debt from '../Debt'
 import Splash from '../Splash'
 export const Base = ({ currentUser, foregroundOpen }) => {
   let globalStyles = [styles.contentHolder, foregroundOpen ? styles.blur : '']
-
   const loggedInRoutes = currentUser
     ?
     <Switch>
-      <Route path='/recent' render={() => <RecentActivity user={currentUser} />} />
+      {/* Should probaly do some kind of JOIN here */}
+      <Route path='/recent' render={() => <RecentActivity user={ {id: currentUser}} />} />
       <Route path='/debt/:creditor(\d+)/:debtor(\d+)' exact component={Debt} />
       <Route path='/debt/:id' component={Debt} />
       <Route path='/user/:uuid(\d+)' component={Profile} />

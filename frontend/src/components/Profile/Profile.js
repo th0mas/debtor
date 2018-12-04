@@ -15,7 +15,7 @@ export const Profile = ({ match, users }) => {
         <div className={styles.layout}>
           <div className={styles.userCard}><UserCard user={user} /></div>
           <div className={styles.activty}>
-            <RecentActivity user={user.id} userProfile />
+            <RecentActivity user={user} userProfile />
           </div>
         </div>
       </div>

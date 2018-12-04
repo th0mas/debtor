@@ -27,8 +27,12 @@
     z-index: -100;
     background: $grey !important;
   }
-
-  @media screen and (max-width: 992px) {
+  @media (max-width: 992px) {
+    .backgroundCard{
+      margin-left: 0px;
+    }    
+  }
+  @media screen and (max-width: 600px) {
     .userCard {
       display: none;
     }

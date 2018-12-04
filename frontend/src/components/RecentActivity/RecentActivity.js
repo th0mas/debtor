@@ -9,20 +9,21 @@ import styles from './styles.scss'
 
 export class RecentActivity extends React.PureComponent {
   componentDidMount() {
-    this.props.getDebts(this.props.user)
+
+    this.props.getDebts(this.props.user.id)
     this.props.getPools()
   }
 
   getDebts(all = false) {
     let debts = all
-      ? this.props.debts.filter(item => item.debtor.id === this.props.user)
-      : this.props.debts.filter(item => item.debtor.id === this.props.user && item.paid === false)
+      ? this.props.debts.filter(item => item.debtor.id === this.props.user.id)
+      : this.props.debts.filter(item => item.debtor.id === this.props.user.id && item.paid === false)
     return debts
   }
   getCredits(all = false) {
     let credits = all === true
-      ? this.props.debts.filter(item => item.creditor.id === this.props.user)
-      : this.props.debts.filter(item => item.creditor.id === this.props.user && item.paid === false)
+      ? this.props.debts.filter(item => item.creditor.id === this.props.user.id)
+      : this.props.debts.filter(item => item.creditor.id === this.props.user.id && item.paid === false)
     return credits
 
   }
@@ -55,6 +56,7 @@ export class RecentActivity extends React.PureComponent {
     if (this.props.accounts.length > 0) {
       return (
         <div className={classes}>
+          {this.props.userProfile ? <h1 className={styles.mobileTitle}>{this.props.user.name}</h1> : null}
           <TopBar debts={this.getDebts()} credits={this.getCredits()} pools={this.props.pools}/>
           <div className={styles.toggleSlider}>
             <SortBySelect sortBy={this.props.sortBy} setSortBy={this.props.setSortBy} />
