@@ -17,7 +17,7 @@ const addCredit = (credits) => {
   })
   return (creditTotal / 100).toFixed(2)
 }
-export const TopBar = ({debts, credits}) => {
+export const TopBar = ({debts, credits, pools}) => {
   return (
     <div className={styles.headerCardHolder} >
       <div className={styles.headerItem}>
@@ -31,6 +31,14 @@ export const TopBar = ({debts, credits}) => {
         <h2>
           £{addCredit(credits)}
         </h2>
+      </div>
+      <div className={styles.headerItem}>
+        <h3>POOLS</h3>
+        {
+          pools.map((pool) => {
+            return <p key={pool.id}>{pool.id}</p>
+          })
+        }
       </div>
     </div >
   )

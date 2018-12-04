@@ -1,19 +1,19 @@
 import uniqBy from 'lodash/uniqBy'
 
 import {
-  RECEIVE_DEBTS,
-  RECEIVE_DEBT,
-  RECEIVE_UPDATE_DEBT,
+  RECEIVE_POOL,
+  RECIEVE_CREATE_POOL,
+  RECEIVE_POOLS,
 } from './actions'
 
-const initialDebtState = [] 
+const initialPoolState = []
 
-export const debtReducer = (state = initialDebtState, action) => {
+export const poolReducer = (state = initialPoolState, action) => {
   switch (action.type) {
-  case RECEIVE_DEBTS:
+  case RECEIVE_POOLS:
     return uniqBy([...action.payload.response, ...state], 'id')
-  case RECEIVE_DEBT:
-  case RECEIVE_UPDATE_DEBT:
+  case RECIEVE_CREATE_POOL:
+  case RECEIVE_POOL:
     return uniqBy([action.payload.response, ...state], 'id')
   default:
     return state

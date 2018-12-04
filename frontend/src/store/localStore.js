@@ -15,6 +15,7 @@ export const saveSate = (state) => {
     entities: {
       currentUser: state.entities.currentUser,
     },
+    ui: state.ui, // Persist UI preferences
     auth: state.auth
   }
   try {

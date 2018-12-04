@@ -10,6 +10,7 @@ import styles from './styles.scss'
 export class RecentActivity extends React.PureComponent {
   componentDidMount() {
     this.props.getDebts(this.props.user)
+    this.props.getPools()
   }
 
   getDebts(all = false) {
@@ -34,8 +35,7 @@ export class RecentActivity extends React.PureComponent {
         result.push(right.shift())
       }
     }
-    // while (left.length) result.push(left.shift())
-    // while (right.length) result.push(right.shift())
+
     return result.concat(left).concat(right)
 
   }
@@ -55,7 +55,7 @@ export class RecentActivity extends React.PureComponent {
     if (this.props.accounts.length > 0) {
       return (
         <div className={classes}>
-          <TopBar debts={this.getDebts()} credits={this.getCredits()} />
+          <TopBar debts={this.getDebts()} credits={this.getCredits()} pools={this.props.pools}/>
           <div className={styles.toggleSlider}>
             <SortBySelect sortBy={this.props.sortBy} setSortBy={this.props.setSortBy} />
             <FormControlLabel

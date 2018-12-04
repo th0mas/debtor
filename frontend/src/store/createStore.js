@@ -9,25 +9,24 @@ import makeRootReducer from './reducers'
 // This sets up enhancers, middleware and applies
 // initial state to the Redux store.
 export default (history) => {
-  // ==================================
-  // Devtool extension 
-  // ==================================
   const enhancers = []
-  if (process.env.NODE_ENV === 'development') {
-    const devExtension = window.__REDUX_DEVTOOLS_EXTENSION__
-    devExtension && enhancers.push(devExtension())
-  }
 
-  // =================================
+  // Enable dev extensions if they exist
+  const devExtension = window.__REDUX_DEVTOOLS_EXTENSION__
+  devExtension && enhancers.push(devExtension())
+
   // Configure middleware
-  // =================================
-  const middleware = [thunk, routerMiddleware(history)]
+  const middleware = [
+    thunk, 
+    routerMiddleware(history)
+  ]
+
   // Load state from local storage
   const storedState = loadState()
 
-  // ================================
   // Init store
-  // ================================
+  //
+  // Creates store along with all the plugins
   const store = createStore(
     connectRouter(history)(makeRootReducer()),
     storedState,
@@ -42,13 +41,12 @@ export default (history) => {
     saveSate(store.getState())
   })
 
+  // ?? breaks if i remove
   store.asyncReducers = {}
 
-  // ===============================
   // Configure Hot Module Replacement
   // during development
   // Js is terrible why do I need to do this
-  // ==============================
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const reducers = require('./reducers').default
