@@ -23,7 +23,6 @@ export const getAccounts = () => {
     dispatch(requestAccounts())
     apiGetAccounts()
       .then((response) => dispatch(receiveAccounts(response)))
-      .catch((response) => console.log(`RIP ${response}`))
 
   }
 }

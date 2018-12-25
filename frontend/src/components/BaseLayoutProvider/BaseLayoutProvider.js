@@ -6,6 +6,7 @@ import RecentActivity from '../RecentActivity'
 import Login from '../Login'
 import Debt from '../Debt'
 import Splash from '../Splash'
+import PoolDetail from '../PoolDetail'
 export const Base = ({ currentUser, foregroundOpen }) => {
   let globalStyles = [styles.contentHolder, foregroundOpen ? styles.blur : '']
   const loggedInRoutes = currentUser
@@ -16,6 +17,7 @@ export const Base = ({ currentUser, foregroundOpen }) => {
       <Route path='/debt/:creditor(\d+)/:debtor(\d+)' exact component={Debt} />
       <Route path='/debt/:id' component={Debt} />
       <Route path='/user/:uuid(\d+)' component={Profile} />
+      <Route path='/pool/:id(\d+)' component={PoolDetail}/>
     </Switch>
     : <Route path='/' render={() => <Redirect to='/' />} />
 

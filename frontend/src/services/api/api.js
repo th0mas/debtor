@@ -15,17 +15,24 @@ export const setApiToken = (token) => {
   authToken = token
 }
 
+export const handleApiError = (error) => {
+  console.log(`Error communicating with server: ${error}`)
+}
+
 export const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response
   } else if (response.status === 401) {
+    console.log('Not authorized: Token expired or no token')
     handleAuthError()
+    let error = new Error('Authentication error')
+    throw error // help its the only way to stop the promise chain
   } else {
     // Make sure we throw errors in the correct place
     let error = new Error(response.statusText)
     error.response = response
     /* eslint no-console: off */
-    console.log(`Something has gone horribly wrong: ${response}`)
+    console.log(`Error communicating with API: ${response.statusText}`)
     throw error
   }
 }
@@ -36,6 +43,7 @@ export const getList = (endpoint, id = null) => {
   return fetch(url, { headers: createHeaders() })
     .then(checkStatus)
     .then((response) => response.json())
+    .catch((error) => handleApiError(error)) 
 }
 
 export const getItem = (endpoint, id) => {

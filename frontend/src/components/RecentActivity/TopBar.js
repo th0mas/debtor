@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Pool from '../Pool'
 import styles from './styles.scss'
 
 const addDebt = (debts) => {
@@ -17,7 +17,7 @@ const addCredit = (credits) => {
   })
   return (creditTotal / 100).toFixed(2)
 }
-export const TopBar = ({debts, credits, pools}) => {
+export const TopBar = ({ debts, credits, pools }) => {
   return (
     <div className={styles.headerCardHolder} >
       <div className={styles.headerItem}>
@@ -32,14 +32,15 @@ export const TopBar = ({debts, credits, pools}) => {
           £{addCredit(credits)}
         </h2>
       </div>
-      <div className={styles.headerItem}>
-        <h3>POOLS</h3>
-        {
-          pools.map((pool) => {
-            return <p key={pool.id}>{pool.id}: Money owed to: {pool.owner.id}</p>
-          })
-        }
-      </div>
+      {
+        pools.map((pool) => {
+          return (
+            <div key={pool.id} className={styles.headerItem}>
+              <Pool pool={pool} />
+            </div>
+          )
+        })
+      }
     </div >
   )
 }

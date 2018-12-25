@@ -10,7 +10,7 @@ import Tick from '@material-ui/icons/Done'
 import { history } from '../../store'
 import styles from './styles.scss'
 
-export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) => {
+export const ActivityCard = ({ activity, type, users, currentUser, saveDebt }) => { // activty, type
   const getUser = (id) => {
     return users.filter(user => user.id === id)[0]
   }
