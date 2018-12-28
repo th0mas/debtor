@@ -73,9 +73,8 @@ class Users(Resource):
     def delete(self, id):
         user = User.query.filter_by(id=id) \
             .first_or_404()
-        user.delete()
 
-        db.session.add(user)
+        db.session.delete(user)
         db.session.commit()
 
         return user

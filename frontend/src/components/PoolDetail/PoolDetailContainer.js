@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { PoolDetail } from './PoolDetail'
 import { push } from 'connected-react-router'
+import { deletePool } from '../../services/pools'
 
 const mapStateToProps = (state) => {
   return {
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    push: (path) => dispatch(push(path))
+    push: (path) => dispatch(push(path)),
+    deletePool: (id) => dispatch(deletePool(id))
   }
 }
 

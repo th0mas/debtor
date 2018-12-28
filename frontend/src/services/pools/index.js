@@ -4,14 +4,18 @@ import {
   requestPool,
   receivePool,
   requestPools,
-  receivePools
+  receivePools,
+  requestDeletePool
 } from './actions'
 
 import {
   getPools as apiGetPools,
   getPool as apiGetPool,
-  savePool as apiSavePool
+  savePool as apiSavePool,
+  deletePool as apiDeletePool
 } from '../api/pools'
+
+import { goBack } from 'connected-react-router'
 
 export const getPools = () => (dispatch) => {
   dispatch(requestPools())
@@ -29,4 +33,10 @@ export const savePool = (pool) => (dispatch) => {
   dispatch(requestCreatePool())
   apiSavePool(pool)
     .then((response) => dispatch(receiveCreatePool(response)))
+}
+
+export const deletePool = (id) => (dispatch) => {
+  dispatch(goBack())
+  apiDeletePool(id)
+    .then(dispatch(requestDeletePool(id)))
 }

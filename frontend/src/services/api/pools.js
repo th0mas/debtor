@@ -2,7 +2,8 @@ import {
   getItem,
   getList,
   put,
-  post
+  post,
+  del
 } from './api'
 
 const POOLS_ENDPOINT = 'pools'
@@ -19,4 +20,8 @@ export const savePool = (pool) => {
   return pool.id
     ? put(POOLS_ENDPOINT, pool)
     : post(POOLS_ENDPOINT, pool)
+}
+
+export const deletePool = (id) => {
+  return del(POOLS_ENDPOINT, id)
 }

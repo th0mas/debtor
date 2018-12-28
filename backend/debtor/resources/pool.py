@@ -41,10 +41,19 @@ class Pools(Resource):
     def put(self, id):
         # TODO: Implement put
 
-        pool = Pools.query.filter_by(id=id) \
+        pool = Pool.query.filter_by(id=id) \
             .first_or_404()
 
         return pool
+    
+    def delete(self, id):
+        pool = Pool.query.filter_by(id=id) \
+            .first_or_404()
+
+        db.session.delete(pool)
+        db.session.commit()
+
+        return {'status': 'success'}
 
 class PoolsList(Resource):
     """

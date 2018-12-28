@@ -4,6 +4,7 @@ export const REQUEST_POOL = 'REQUEST_POOL'
 export const RECEIVE_POOL = 'RECEIVE_POOL'
 export const REQUEST_CREATE_POOL = 'REQUEST_CREATE_POOL'
 export const RECIEVE_CREATE_POOL = 'CREATE_POOL'
+export const REQUEST_DELETE_POOL = 'REQUEST_DELETE_POOL'
 
 export const requestPools = () => {
   return {
@@ -41,5 +42,12 @@ export const receiveCreatePool = (response) => {
   return {
     type: RECIEVE_CREATE_POOL,
     payload: { response }
+  }
+}
+
+export const requestDeletePool = (id) => {
+  return {
+    type: REQUEST_DELETE_POOL,
+    payload: {id}
   }
 }
