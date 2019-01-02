@@ -76,7 +76,8 @@ export const post = (endpoint, payload) => {
 }
 
 export const del = (endpoint, id) => {
-  let url = `${BASE_URL}/${endpoint}/${id}/`
+  let url = `${BASE_URL}/${endpoint}/`
+  url = id ? `${url}/id/` : url
   return fetch(url, {
     method: 'DELETE',
     headers: createHeaders()

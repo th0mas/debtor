@@ -64,9 +64,11 @@ class PoolsList(Resource):
     @marshal_with_field(fields.List(fields.Nested(resource_fields)))
     def get(self):
         # Generate a phat query
-        return Pool.query.join(Debt).filter(
+        q =  Pool.query.join(Debt).filter(
             or_(Debt.debtor == current_user, Pool.owner_id == current_user.id) # TODO: Doesn't work, funky query results
         )
+
+        return q
 
     # TODO: Fix this mess
     @marshal_with(resource_fields)  
