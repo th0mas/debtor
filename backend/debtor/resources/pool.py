@@ -65,7 +65,7 @@ class PoolsList(Resource):
     def get(self):
         # Generate a phat query
         return Pool.query.join(Debt).filter(
-            or_(Debt.debtor == current_user, Pool.owner == current_user)
+            or_(Debt.debtor == current_user, Pool.owner_id == current_user.id) # TODO: Doesn't work, funky query results
         )
 
     # TODO: Fix this mess
@@ -94,6 +94,7 @@ class PoolsList(Resource):
             current_user,
             *new_debts # Expand the debts using the `*` operator
         )
+        db.session.add(pool) # Whoops
         db.session.commit()
         return pool
             

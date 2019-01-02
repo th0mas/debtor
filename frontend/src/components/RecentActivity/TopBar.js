@@ -1,4 +1,7 @@
 import React from 'react'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Add from '@material-ui/icons/AddCircleOutline'
 import Pool from '../Pool'
 import styles from './styles.scss'
 
@@ -31,6 +34,12 @@ export const TopBar = ({ debts, credits, pools }) => {
         <h2>
           £{addCredit(credits)}
         </h2>
+      </div>
+      <div className={styles.headerItem}>
+        <Card><CardContent>
+          <div className={styles.centerIcon}><Add fontSize='large'/></div>
+          <p>Create Pool</p>
+        </CardContent></Card>
       </div>
       {
         pools.map((pool) => {
