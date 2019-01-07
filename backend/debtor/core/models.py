@@ -165,7 +165,7 @@ class Debt(db.Model):
 class Pool(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
-    associated_debts = db.relationship('Debt', backref='pool', lazy=True)
+    associated_debts = db.relationship('Debt', backref='pool') # R.I.P. Performance 2k18-2k19
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, owner, *associated_debts):

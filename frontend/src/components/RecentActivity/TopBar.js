@@ -36,7 +36,7 @@ export const TopBar = ({ debts, credits, pools }) => {
         </h2>
       </div>
       <div className={styles.headerItem}>
-        <Card><CardContent>
+        <Card classes={{root: styles.infoCard}}><CardContent>
           <div className={styles.centerIcon}><Add fontSize='large'/></div>
           <p>Create Pool</p>
         </CardContent></Card>

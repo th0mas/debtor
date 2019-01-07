@@ -39,7 +39,7 @@ export const checkStatus = (response) => {
 
 export const getList = (endpoint, id = null) => {
   let url = `${BASE_URL}/${endpoint}/`
-  url = id ? `${url}/?id=${id}` : url
+  url = id ? `${url}?id=${id}` : url
   return fetch(url, { headers: createHeaders() })
     .then(checkStatus)
     .then((response) => response.json())
@@ -77,7 +77,7 @@ export const post = (endpoint, payload) => {
 
 export const del = (endpoint, id) => {
   let url = `${BASE_URL}/${endpoint}/`
-  url = id ? `${url}/id/` : url
+  url = id ? `${url}${id}/` : url
   return fetch(url, {
     method: 'DELETE',
     headers: createHeaders()
