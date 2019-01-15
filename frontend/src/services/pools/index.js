@@ -40,6 +40,4 @@ export const deletePool = (id) => (dispatch) => {
   dispatch(goBack())
   apiDeletePool(id)
     .then(dispatch(requestDeletePool(id)))
-    .then(dispatch(getPools())) // Oh baby a triple
-                                // /pools/ is called _three_ times on this page load? 
 }

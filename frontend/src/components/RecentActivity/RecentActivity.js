@@ -9,9 +9,7 @@ import styles from './styles.scss'
 
 export class RecentActivity extends React.PureComponent {
   componentDidMount() {
-
-    this.props.getDebts(this.props.user.id)
-    this.props.getPools()
+    this.props.getDebts(this.props.user.id) // Make sure
   }
 
   getDebts(all = false) {

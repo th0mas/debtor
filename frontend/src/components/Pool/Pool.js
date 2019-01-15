@@ -22,7 +22,7 @@ export const Pool = ({ pool, users, debts, push }) => {
   const colour = (leftToPay === 0 ) ? 'secondary' : 'primary'
 
   return (
-    <Card onClick={() => push(`/pool/${pool.id}`)}>
+    <Card onClick={() => push(`/pool/${pool.id}`)} style={{cursor: 'pointer'}}>
       <CardContent>
         <p style={{fontStyle: 'bold'}}>{owner.name}</p>
         £{currentOwed / 100} / £{totalOwed / 100}
