@@ -15,7 +15,7 @@ import {
 } from '../api/auth'
 
 import { setCurrentUser, getAccounts } from '../accounts'
-
+import initApp from '../../init'
 import { store } from '../../store'
 
 const decodeJWT = (token) => {
@@ -34,7 +34,7 @@ export const loginUser = (username, password) => {
           ? dispatch(setLoginFail())
           : dispatch(recieveUserToken(resp.Authorization))
       })
-      .then(() => dispatch(initUser([getAccounts])))
+      .then(() => dispatch(initApp))
   }
 }
 
@@ -57,6 +57,8 @@ export const logoutUser = () => {
   }
 }
 
+// Initialize the current user, dispatches actions required by calling func
+// to get app into OK state. Should be moved to /init.js
 export const initUser = (initFuncs = []) => {
   return (dispatch, getState) => {
     const { auth } = getState()

@@ -8,7 +8,7 @@ import { register as registerServiceWorker } from './serviceWorker'
 import './styles/main.scss'
 
 // Initialize the application store
-init(store)
+init(store.dispatch)
 
 // Find our applications mount node on the DOM
 const MOUNT_NODE = document.getElementById('root')
