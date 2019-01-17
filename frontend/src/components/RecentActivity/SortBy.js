@@ -10,22 +10,22 @@ import styles from './styles.scss'
 
 export const SortBySelect = ({ sortBy, setSortBy }) => {
   return (
-    <FormControl variant='outlined' className={styles.sortBy}>
+    <FormControl className={styles.sortBy}>
       <InputLabel
         htmlFor="sort-by"
       >
         Sort By
       </InputLabel>
-      <Select
+      <Select style={{display: 'flex'}}
         value={sortBy}
         onChange={(event) => setSortBy(event.target.value)}
-        input={
-          <Input
-            labelWidth={60}
-            name="sort-by"
-            id="sort-by"
-          />
-        }
+        // input={
+        //   <Input
+        //     labelWidth={60}
+        //     name="sort-by"
+        //     id="sort-by"
+        //   />
+        // }
       >
         <Menuitem value={'time_created'}>Date created</Menuitem>
         <Menuitem value={'amount'}>Amount Owed</Menuitem>

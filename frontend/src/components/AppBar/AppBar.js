@@ -31,7 +31,7 @@ const AppBar = ({ currentUser, users }) => {
       <MuiAppBar position="fixed">
         <Toolbar>
           <IconButton color="inherit" aria-label="Menu">
-            <MenuIcon />
+            <MenuIcon /> {/* TODO: What should this do? */}
           </IconButton>
           <Typography variant='title' color='primary' className={styles.title}>
             <Link to='/'>debtor</Link>

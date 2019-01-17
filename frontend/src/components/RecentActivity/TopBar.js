@@ -20,7 +20,7 @@ const addCredit = (credits) => {
   })
   return (creditTotal / 100).toFixed(2)
 }
-export const TopBar = ({ debts, credits, pools }) => {
+export const TopBar = ({ debts, credits, pools = [] }) => {
   return (
     <div className={styles.headerCardHolder} >
       <div className={styles.headerItem}>
@@ -37,7 +37,7 @@ export const TopBar = ({ debts, credits, pools }) => {
       </div>
       <div className={styles.headerItem}>
         <Card classes={{root: styles.infoCard}}><CardContent>
-          <div className={styles.centerIcon}><Add fontSize='large'/></div>
+          <div className={styles.centerIcon}><Add/></div>
           <p>Create Pool</p>
         </CardContent></Card>
       </div>

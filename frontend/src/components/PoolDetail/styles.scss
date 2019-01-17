@@ -1,0 +1,18 @@
+:local {
+    .top {
+        display: flex;
+        align-items: center;
+    }
+    .rmBtn {
+        margin-left: auto !important;
+        height: 100%;
+    }
+
+    .contentHolder {
+        display: flex;
+    }
+
+    .content {
+        width: 100%
+    }
+}

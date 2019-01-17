@@ -55,7 +55,7 @@ export class RecentActivity extends React.PureComponent {
       return (
         <div className={classes}>
           {this.props.userProfile ? <h1 className={styles.mobileTitle}>{this.props.user.name}</h1> : null}
-          <TopBar debts={this.getDebts()} credits={this.getCredits()} pools={this.props.pools}/>
+          <TopBar debts={this.getDebts()} credits={this.getCredits()} pools={this.props.userProfile ? [] : this.props.pools}/>
           <div className={styles.toggleSlider}>
             <SortBySelect sortBy={this.props.sortBy} setSortBy={this.props.setSortBy} />
             <FormControlLabel
