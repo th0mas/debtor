@@ -7,7 +7,7 @@ import styles from './styles.scss'
 
 export const PoolDetail = ({ match, pools, debts, users, deletePool }) => {
   const pool = pools.find(pool => pool.id === parseInt(match.params.id))
-  if (!pool) { return <h1>Loading</h1> }
+  if (!(users.length > 0 && debts.length > 0 && pools.length > 0 )) { return <h1>Loading</h1> }
 
   const owner = users.find(user => user.id === pool.owner.id)
 
@@ -23,6 +23,8 @@ export const PoolDetail = ({ match, pools, debts, users, deletePool }) => {
   associatedDebts.forEach(debt => debt.paid ? null : leftToPay += debt.amount)
 
   const percentLeft = ((totalOwed - leftToPay) / totalOwed) * 100
+  const colour = (leftToPay === 0 ) ? 'secondary' : 'primary'
+  // ALL COPIED
 
   return (
     <div>
@@ -30,11 +32,11 @@ export const PoolDetail = ({ match, pools, debts, users, deletePool }) => {
         <h1>{`Pool owed to ${owner.name}`}</h1>
         <Button variant='contained' color='primary' onClick={() => deletePool(pool.id)} className={styles.rmBtn}>Remove</Button>
       </div>
-      <LinearProgress variant='determinate' value={percentLeft}/>
+      <LinearProgress variant='determinate' value={percentLeft} color={colour}/>
       <div className={styles.contentHolder}>
         <div className={styles.content}>
           <h2>£{leftToPay / 100} left to pay out of £{totalOwed / 100}</h2>
-          <p>{associatedDebts[0].description}</p>
+          <p>{associatedDebts[0].description}</p> {/* All have same description */}
         </div>
         <div className={styles.content}>
           {

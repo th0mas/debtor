@@ -85,7 +85,7 @@ class PoolsList(Resource):
             debt = Debt(
                 amount,
                 description,
-                User.query.get(user_id), # Error 500 if returns none
+                User.query.get(user_id), # Error 500 if returns `None`
                 current_user             # Need to verify user exists
             )
             db.session.add(debt)
