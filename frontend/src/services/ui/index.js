@@ -1,16 +1,15 @@
 import {
   toggleViewAll,
-  updateDebtFormState as updateDebtStateAction
+  updateDebtFormState,
+  updatePoolFormState
 } from './actions'
 
-export const updateDebtFormState = (updateEvent) => {
-  return (dispatch) => {
-    const updateFieldName = updateEvent.target.name
-    const updateFieldValue = updateEvent.target.value
+export const updateFormState = (target) => (updateEvent) => (dispatch) => {
+  const updateFieldName = updateEvent.target.name
+  const updateFieldValue = updateEvent.target.value
 
-    const updateObject = {[updateFieldName]: updateFieldValue}
-    dispatch(updateDebtStateAction(updateObject))
-  }
+  const updateObject = { [updateFieldName]: updateFieldValue }
+  dispatch(target(updateObject))
 }
 
-export {toggleViewAll}
+export { toggleViewAll, updateDebtFormState, updatePoolFormState }

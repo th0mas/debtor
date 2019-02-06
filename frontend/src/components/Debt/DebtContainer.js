@@ -3,7 +3,7 @@ import { push } from 'connected-react-router'
 import { Debt } from './Debt'
 
 import { saveDebt } from '../../services/debts'
-import {updateDebtFormState} from '../../services/ui'
+import {updateFormState, updateDebtFormState} from '../../services/ui'
 
 const mapStateToProps = (state) => {
   return {
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     push: (path) => dispatch(push(path)),
     saveDebt: (debt) => dispatch(saveDebt(debt)),
-    updateDebtState: (newState) => dispatch(updateDebtFormState(newState))
+    updateDebtState: (newState) => dispatch(updateFormState(updateDebtFormState)(newState))
   }
 }
 
