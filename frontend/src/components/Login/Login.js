@@ -17,7 +17,6 @@ export class Login extends React.PureComponent {
 
   loginUser = () => {
     this.props.loginUser(this.props.loginForm.email, this.props.loginForm.password)
-      .then(this.componentDidUpdate())
   }
 
   setCreateAccount = (c) => {
