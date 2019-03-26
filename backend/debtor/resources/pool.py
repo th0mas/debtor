@@ -39,7 +39,7 @@ class Pools(Resource):
 
     @marshal_with(resource_fields)
     def put(self, id):
-        # TODO: Implement put
+        # TODO: Implement put - do we need put?
 
         pool = Pool.query.filter_by(id=id) \
             .first_or_404()

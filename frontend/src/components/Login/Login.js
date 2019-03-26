@@ -10,10 +10,30 @@ import Button from '@material-ui/core/Button'
 import styles from './styles.scss'
 
 export class Login extends React.PureComponent {
-  loginUser = (e) => {
+  handleLoginUser = (e) => {
     e.preventDefault()
-    this.props.loginUser(this.email.value, this.password.value)
+    this.loginUser()
+  }
+
+  loginUser = () => {
+    this.props.loginUser(this.props.loginForm.email, this.props.loginForm.password)
       .then(this.componentDidUpdate())
+  }
+
+  setCreateAccount = (c) => {
+    this.props.updateLoginForm({ target : {
+      name: 'newAccount',
+      value: c
+    }})
+  }
+
+  createAccount = () => {
+    this.props.saveAccount(this.props.loginForm)
+      .then(() => this.loginUser())
+  }
+
+  componentDidMount() {
+    this.setCreateAccount(false)
   }
 
   componentDidUpdate() {
@@ -22,34 +42,63 @@ export class Login extends React.PureComponent {
     }
   }
   render() {
+    let newAccount = this.props.loginForm && this.props.loginForm.newAccount
     return (
-      <div style={{textAlign: 'center'}}>
+      <div style={{ textAlign: 'center' }}>
         <Card className={styles.card}>
           <CardContent>
-            { this.props.loginFailed
+            {this.props.loginFailed
               ? <p className={styles.loginFailText}>Username or password incorrect</p>
               : null
             }
-            <form className={styles.formHolder} onSubmit={this.loginUser}>
+            <form className={styles.formHolder} onSubmit={newAccount ? this.props.createUser : this.handleLoginUser}>
               <FormControl className={styles.inputBox}>
                 <InputLabel htmlFor='email'>Email</InputLabel>
                 <Input fullWidth
                   id='email'
+                  name='email'
                   type=''
-                  inputRef={(element) => this.email = element}
+                  onChange={this.props.updateLoginForm}
                 />
               </FormControl>
               <FormControl className={styles.inputBox}>
                 <InputLabel htmlFor='password'>Password</InputLabel>
                 <Input fullWidth
                   id='password'
+                  name='password'
                   type='password'
-                  inputRef={(element) => this.password = element}
+                  onChange={this.props.updateLoginForm}
                 />
               </FormControl>
-              <CardActions>
-                <Button type='submit'>Login</Button>
-              </CardActions>
+              {newAccount
+                ?
+                <>
+                  <FormControl className={styles.inputBox}>
+                    <InputLabel htmlFor='name'>Name</InputLabel>
+                    <Input fullWidth
+                      id='name'
+                      name='name'
+                      type=''
+                      onChange={this.props.updateLoginForm}
+                    />
+                  </FormControl>
+                  <FormControl className={styles.inputBox}>
+                    <InputLabel htmlFor='name'>Profile Image URL</InputLabel>
+                    <Input fullWidth
+                      id='profile_img'
+                      name='profile_img'
+                      type='url'
+                      onChange={this.props.updateLoginForm}
+                    />
+                  </FormControl>
+                  <CardActions>
+                    <Button onClick={this.createAccount}>Create Account</Button>
+                  </CardActions>
+                </>
+                : <CardActions>
+                  <Button type='submit'>Login</Button>
+                  <Button onClick={() => this.setCreateAccount(true)}>Create Account</Button>
+                </CardActions>}
             </form>
           </CardContent>
         </Card>

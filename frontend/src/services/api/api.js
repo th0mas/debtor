@@ -66,6 +66,7 @@ export const put = (endpoint, payload) => {
 
 export const post = (endpoint, payload) => {
   let url = `${BASE_URL}/${endpoint}/`
+  console.log(payload)
   return fetch(url, {
     method: 'POST',
     headers: createHeaders(),

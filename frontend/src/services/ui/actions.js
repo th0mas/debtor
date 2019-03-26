@@ -7,6 +7,7 @@ export const SET_FOREGROUND_CLOSED = 'SET_FOREGROUND_CLOSED'
 export const SET_SORT_BY = 'SET_SORT_BY'
 export const TOGGLE_MODAL_OPEN = 'TOGGLE_MODAL_OPEN'
 export const UPDATE_FORM_POOL_STATE = 'UPDATE_FORM_POOL_STATE'
+export const UPDATE_LOGIN_FORM_STATE = 'UPDATE_LOGIN_FORM_STATE'
 
 export const toggleViewAll = () => ({
   type: TOGGLE_VIEW_ALL
@@ -21,6 +22,13 @@ export const updateDebtFormState = (newState) => ({
 
 export const updatePoolFormState = (newState) => ({
   type: UPDATE_FORM_POOL_STATE,
+  payload: {
+    newState
+  }
+})
+
+export const updateLoginFormState = (newState) => ({
+  type: UPDATE_LOGIN_FORM_STATE,
   payload: {
     newState
   }

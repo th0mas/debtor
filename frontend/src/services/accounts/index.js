@@ -8,6 +8,7 @@ import {
   receiveUpdateAccount,
   requestDeleteAccount,
   receiveDeleteAccount,
+  getAccountDetails,
   setCurrentUser as setCurrentUserAction
 } from './actions'
 
@@ -35,10 +36,17 @@ export const getAccount = (id) => {
   }
 }
 
+export const getAccounDetails = (id) => (dispatch, getState) => {
+  const state = getState()
+  const account = state.entities.accounts.find((a) => a.id == id)
+
+  dispatch(getAccounDetails(account))
+}
+
 export const saveAccount = (account) => {
   return (dispatch) => {
     dispatch(requestUpdateAccount())
-    apiSaveAccount(account)
+    return apiSaveAccount(account)
       .then((response) => dispatch(receiveUpdateAccount(response)))
   }
 }

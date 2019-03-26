@@ -7,6 +7,7 @@ export const RECEIVE_UPDATE_ACCOUNT = 'RECEIVE_UPDATE_ACCOUNT'
 export const REQUEST_DELETE_ACCOUNT = 'REQUEST_DELETE_ACCOUNT'
 export const RECEIVE_DELETE_ACCOUNT = 'RECIEVE_DELETE_ACCOUNT'
 export const SET_USER_ACCOUNT = 'SET_USER_ACCOUNT'
+export const GET_ACCOUNT_DETAILS = 'GET_ACCOUNT_DETAILS'
 
 export const requestAccounts = () => {
   return {
@@ -76,6 +77,15 @@ export const setCurrentUser = (id) => {
     type: SET_USER_ACCOUNT,
     payload: {
       id
+    }
+  }
+}
+
+export const getAccountDetails = (account) => {
+  return {
+    type: GET_ACCOUNT_DETAILS,
+    payload: {
+      account
     }
   }
 }

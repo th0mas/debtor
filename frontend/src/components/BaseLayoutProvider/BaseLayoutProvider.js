@@ -7,6 +7,7 @@ import Login from '../Login'
 import Debt from '../Debt'
 import Splash from '../Splash'
 import PoolDetail from '../PoolDetail'
+
 export const Base = ({ currentUser, foregroundOpen }) => {
   let globalStyles = [styles.contentHolder, foregroundOpen ? styles.blur : '']
   const loggedInRoutes = currentUser

@@ -1,6 +1,7 @@
 import { TOGGLE_VIEW_ALL, 
   UPDATE_DEBT_FORM_STATE,
-  UPDATE_FORM_POOL_STATE, 
+  UPDATE_FORM_POOL_STATE,
+  UPDATE_LOGIN_FORM_STATE,
   SET_LOGIN_FAIL, 
   SET_LOGIN_SUCCESS, 
   SET_FOREGROUND_CLOSED, 
@@ -13,6 +14,8 @@ const initialUiState = {
   loginFailed: false,
   foregroundOpen: false,
   sortBy: 'amount',
+  debtForm: {},
+  poolForm: {},
   modal: {
     modal: '',
     el: ''
@@ -27,6 +30,8 @@ export const UIReducer = (state = initialUiState, action) => {
     return { ...state, debtForm: UIFormReducer(state.debtForm, action) }
   case UPDATE_FORM_POOL_STATE:
     return { ...state, poolForm: UIFormReducer(state.poolForm, action)}
+  case UPDATE_LOGIN_FORM_STATE:
+    return {...state, loginForm: UIFormReducer(state.loginForm, action)}
   case SET_LOGIN_FAIL:
     return Object.assign({}, state, {loginFailed: true})
   case SET_LOGIN_SUCCESS:

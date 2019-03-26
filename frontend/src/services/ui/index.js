@@ -1,7 +1,8 @@
 import {
   toggleViewAll,
   updateDebtFormState,
-  updatePoolFormState
+  updatePoolFormState,
+  updateLoginFormState
 } from './actions'
 
 export const updateFormState = (target) => (updateEvent) => (dispatch) => {
@@ -12,4 +13,4 @@ export const updateFormState = (target) => (updateEvent) => (dispatch) => {
   dispatch(target(updateObject))
 }
 
-export { toggleViewAll, updateDebtFormState, updatePoolFormState }
+export { toggleViewAll, updateDebtFormState, updatePoolFormState, updateLoginFormState }

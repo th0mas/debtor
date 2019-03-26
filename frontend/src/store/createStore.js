@@ -37,6 +37,7 @@ export default (history) => {
   )
 
   // Update local store
+  // This saves the local store to disk on change
   store.subscribe(() => {
     saveSate(store.getState())
   })
