@@ -34,8 +34,9 @@ export class Login extends React.PureComponent {
 
   componentDidMount() {
     this.setCreateAccount(false)
+    this.props.setLoginSuccess()
   }
-  
+
   render() {
     let newAccount = this.props.loginForm && this.props.loginForm.newAccount
     return (
