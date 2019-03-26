@@ -35,12 +35,7 @@ export class Login extends React.PureComponent {
   componentDidMount() {
     this.setCreateAccount(false)
   }
-
-  componentDidUpdate() {
-    if (this.props.loginFailed) {
-      this.password.value = ''
-    }
-  }
+  
   render() {
     let newAccount = this.props.loginForm && this.props.loginForm.newAccount
     return (
