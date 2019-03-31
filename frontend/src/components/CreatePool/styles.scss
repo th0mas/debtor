@@ -1,0 +1,44 @@
+:local {
+    .poolCard {
+        max-width: 500px;
+        overflow: visible !important;
+    }
+
+    .formHolder {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .avatarHolder {
+        display: flex;
+    }
+
+    .arrow {
+        padding: 5px;
+    }
+
+    .paper {
+        position: absolute !important;
+        z-index: 1 !important;
+        left: 0;
+        right: 0;
+        overflow: visible;
+    }
+
+  .root {
+    flex-grow: 1;
+    height: 250;
+  }
+  .input {
+    display: flex !important;
+    padding: 0;
+  }
+  .valueContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    align-items: center;
+    overflow: visible !important;
+  }
+}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-
+import {push} from 'connected-react-router'
 import { getAccounts, getAccount } from '../../services/accounts'
 import { getDebts } from '../../services/debts'
 import { getPools } from '../../services/pools'
@@ -25,7 +25,8 @@ const mapDispatchToProps = (dispatch) => {
     getDebts: (id = null) => dispatch(getDebts(id)),
     toggleViewAll: () => dispatch(toggleViewAll()),
     setSortBy: (sortBy) => dispatch(setSortBy(sortBy)),
-    getPools: () => dispatch(getPools())
+    getPools: () => dispatch(getPools()),
+    push: (path) => dispatch(push(path))
   }
 }
 

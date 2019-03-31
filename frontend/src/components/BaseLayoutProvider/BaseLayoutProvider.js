@@ -7,6 +7,7 @@ import Login from '../Login'
 import Debt from '../Debt'
 import Splash from '../Splash'
 import PoolDetail from '../PoolDetail'
+import CreatePool from '../CreatePool'
 
 export const Base = ({ currentUser, foregroundOpen }) => {
   let globalStyles = [styles.contentHolder, foregroundOpen ? styles.blur : '']
@@ -19,6 +20,7 @@ export const Base = ({ currentUser, foregroundOpen }) => {
       <Route path='/debt/:id' component={Debt} />
       <Route path='/user/:uuid(\d+)' component={Profile} />
       <Route path='/pool/:id(\d+)' component={PoolDetail}/>
+      <Route path='/pool/new/' component={CreatePool} />
     </Switch>
     : <Route path='/' render={() => <Redirect to='/' />} />
 

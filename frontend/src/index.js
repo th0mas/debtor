@@ -4,7 +4,6 @@ import * as Sentry from '@sentry/browser'
 import Root from './components/Root'
 import {store, history} from './store'
 import init from './init'
-import { register as registerServiceWorker } from './serviceWorker'
 import './styles/main.scss'
 
 // Initialize the application store
@@ -37,4 +36,3 @@ if (module.hot) {
 }
 
 render() // Go go go!
-registerServiceWorker() // Register a service worker for offline caching

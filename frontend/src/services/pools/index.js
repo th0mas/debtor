@@ -20,24 +20,24 @@ import { goBack } from 'connected-react-router'
 
 export const getPools = () => (dispatch) => {
   dispatch(requestPools())
-  apiGetPools()
+  return apiGetPools()
     .then((response) => dispatch(receivePools(response)))
 }
 
 export const getPool = (id) => (dispatch) => {
   dispatch(requestPool())
-  apiGetPool(id)
+  return apiGetPool(id)
     .then((response) => dispatch(receivePool(response)))
 }
 
 export const savePool = (pool) => (dispatch) => {
   dispatch(requestCreatePool())
-  apiSavePool(pool)
+  return apiSavePool(pool)
     .then((response) => dispatch(receiveCreatePool(response)))
 }
 
 export const deletePool = (id) => (dispatch) => {
   dispatch(goBack())
-  apiDeletePool(id)
+  return apiDeletePool(id)
     .then(dispatch(requestDeletePool(id)))
 }
