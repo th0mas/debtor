@@ -94,7 +94,7 @@ export class CreatePool extends React.PureComponent {
               InputProps={{
                 startAdornment: <InputAdornment position="start">£</InputAdornment>,
               }}
-              inputProps={{
+              inputProps={{ /* eslint react/jsx-no-duplicate-props: off */
                 min: 0.01,
                 max: 1000000000,
                 step: 0.01

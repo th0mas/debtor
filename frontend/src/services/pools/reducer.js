@@ -17,7 +17,7 @@ export const poolReducer = (state = initialPoolState, action) => {
   case RECEIVE_POOL:
     return uniqBy([action.payload.response, ...state], 'id')
   case REQUEST_DELETE_POOL:
-    return  state.filter((pool) => pool.id != action.payload.id)
+    return  state.filter((pool) => pool.id !== action.payload.id)
   default:
     return state
   }

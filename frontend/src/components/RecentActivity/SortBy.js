@@ -2,8 +2,6 @@ import React from 'react'
 import Select from '@material-ui/core/Select'
 import Menuitem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Input from '@material-ui/core/OutlinedInput'
 import InputLabel from '@material-ui/core/InputLabel'
 
 import styles from './styles.scss'

@@ -14,7 +14,7 @@ import {
   getNewToken as apiGetNewToken
 } from '../api/auth'
 
-import { setCurrentUser, getAccounts } from '../accounts'
+import { setCurrentUser } from '../accounts'
 import initApp from '../../init'
 import { store } from '../../store'
 

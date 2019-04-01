@@ -2,8 +2,6 @@ import React from 'react'
 import MuiAppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { Typography } from '@material-ui/core'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 import UserAvatar from '../UserAvatar'
 
@@ -30,9 +28,6 @@ const AppBar = ({ currentUser, users }) => {
     <div>
       <MuiAppBar position="fixed">
         <Toolbar>
-          <IconButton color="inherit" aria-label="Menu">
-            <MenuIcon /> {/* TODO: What should this do? */}
-          </IconButton>
           <Typography variant='title' color='primary' className={styles.title}>
             <Link to='/'>debtor</Link>
           </Typography>
