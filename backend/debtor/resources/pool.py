@@ -63,14 +63,13 @@ class PoolsList(Resource):
 
     @marshal_with_field(fields.List(fields.Nested(resource_fields)))
     def get(self):
-        # Generate a phat query
+        # Create a large database query across the Pools and Debt tables
         q =  Pool.query.join(Debt).filter(
-            or_(Debt.debtor == current_user, Pool.owner_id == current_user.id) # TODO: Doesn't work, funky query results
+            or_(Debt.debtor == current_user, Pool.owner_id == current_user.id)
         )
 
         return q
 
-    # TODO: Fix this mess
     @marshal_with(resource_fields)  
     def post(self):
         # Get required attributes from http request
@@ -96,7 +95,7 @@ class PoolsList(Resource):
             current_user,
             *new_debts # Expand the debts using the `*` operator
         )
-        db.session.add(pool) # Whoops
+        db.session.add(pool)
         db.session.commit()
         return pool
             

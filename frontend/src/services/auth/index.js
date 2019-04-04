@@ -58,7 +58,7 @@ export const logoutUser = () => {
 }
 
 // Initialize the current user, dispatches actions required by calling func
-// to get app into OK state. Should be moved to /init.js
+// to get app into OK state.
 export const initUser = (initFuncs = []) => {
   return (dispatch, getState) => {
     const { auth } = getState()

@@ -3,12 +3,13 @@ version: '3'
 services:
   backend:
     build: ./backend/
+    environment:
+      - DATABASE_URL=sqlite:///devdb.db
+      - FLASK_APP_SECRET_KEY=devkey
     ports:
       - "5000:5000"
     volumes:
       - ./backend:/app
-    depends_on:
-      - postgres
   frontend:
     build: ./frontend/
     environment:
@@ -17,11 +18,3 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/opt/app
-  postgres:
-    image: "postgres:alpine"
-    volumes:
-      - "dbdata:/var/lib/postgresql/data"
-    ports:
-      - "5432:5432"
-volumes:
-  dbdata:

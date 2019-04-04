@@ -16,6 +16,9 @@ export default (history) => {
   devExtension && enhancers.push(devExtension())
 
   // Configure middleware
+  // Enables passing functions to the store using thunk.
+  // Adds React-Router middleware so we can access URL infomation
+  // through the store.
   const middleware = [
     thunk, 
     routerMiddleware(history)
@@ -42,18 +45,17 @@ export default (history) => {
     saveSate(store.getState())
   })
 
-  // ?? breaks if i remove
+  // Enables asyncrounous reducers
   store.asyncReducers = {}
 
   // Configure Hot Module Replacement
   // during development
-  // Js is terrible why do I need to do this
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const reducers = require('./reducers').default
       store.replaceReducer(reducers(store.asyncReducers))
     })
   }
-  return store // phew
+  return store // Return the completed store to the application
 
 }
