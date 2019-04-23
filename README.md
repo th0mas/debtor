@@ -5,7 +5,7 @@ A web application for managing debts.
 Uses Flask/SQLAlchemy on the backend and React/Redux on the frontend.
 
 ## 🚀 Running the application
- There are two ways to run debtor, either through [docker-compose](1) or through manually running the development servers.
+ There are two ways to run debtor, either through [docker-compose](https://docs.docker.com/compose/) or through manually running the development servers.
 
  ### Docker & Docker-Compose (Recommended)
  Requires docker and docker-compose to be installed as prerequisites.
@@ -27,8 +27,7 @@ Prerequisites
 - python3
 - libffi (*Should* already be installed)
 - python3-dev
-- pipenv ( has other requirements )
-- inotify-tools (mac only)
+- pipenv ( best installed through your OS package manager e.g. APT or Brew )
 ```bash
 git clone https://gihub.com/th0mas/debtor  # Clone code from github
 cd debtor                                  # Enter the project directory
@@ -44,5 +43,3 @@ pipenv run flask run
 ---
 ## 🌍Live example
 A working example can be used at [debtor.tomhaines.xyz](https://debtor.tomhaines.xyz)
-
- [1]: https://docs.docker.com/compose/
