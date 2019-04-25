@@ -31,7 +31,7 @@ export class CreatePool extends React.PureComponent {
       .then(() => this.props.push('/recent'))
   }
 
-  MultiValue = (props) => {
+  multiValue = (props) => {
     return (
       <Chip
         avatar={<UserAvatar user={this.getUser(props.data.value)} />}
@@ -42,7 +42,7 @@ export class CreatePool extends React.PureComponent {
     )
   }
 
-  Menu = (props) => {
+  menu = (props) => {
     return (
       <Paper square className={styles.paper} {...props.innerProps}>
         {props.children}
@@ -72,7 +72,7 @@ export class CreatePool extends React.PureComponent {
     )
   }
 
-  ValueContainer = (props) => {
+  valueContainer = (props) => {
     return <div className={styles.valueContainer}>{props.children}</div>
   }
 
@@ -117,7 +117,7 @@ export class CreatePool extends React.PureComponent {
                 label: 'People',
                 InputLabelProps: { shrink: true }
               }}
-              components={{ MultiValue: this.MultiValue, Menu: this.Menu, Control: this.Control, ValueContainer: this.ValueContainer }}
+              components={{ MultiValue: this.multiValue, Menu: this.menu, Control: this.Control, ValueContainer: this.valueContainer }}
               options={userSuggestions}
               value={this.props.pool.multi}
               onChange={this.updatePicker}

@@ -1,3 +1,3 @@
-import UserAvatar from './UserAvatarContainer'
+import { UserAvatar } from './UserAvatar'
 
 export default UserAvatar

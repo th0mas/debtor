@@ -20,6 +20,8 @@ export class Login extends React.PureComponent {
   }
 
   setCreateAccount = (c) => {
+    // Set the create account status
+    // We fake a react event so we can re-use the existing `updateLoginForm` method
     this.props.updateLoginForm({ target : {
       name: 'newAccount',
       value: c

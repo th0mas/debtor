@@ -11,9 +11,8 @@ export const PoolDetail = ({ match, pools, debts, users, deletePool }) => {
 
   const owner = users.find(user => user.id === pool.owner.id)
 
-  // TODO: Copied code - refractor out
-  const associatedDebts = debts.filter((debt) => { // TODO: extract this out - same as ../Pool/Pool:`associatedDebts`
-    return pool.associated_debts.map(debt => debt.id).includes(debt.id) // can be more efficient?
+  const associatedDebts = debts.filter((debt) => {
+    return pool.associated_debts.map(debt => debt.id).includes(debt.id) 
   })
 
   let totalOwed = 0
@@ -24,7 +23,6 @@ export const PoolDetail = ({ match, pools, debts, users, deletePool }) => {
 
   const percentLeft = ((totalOwed - leftToPay) / totalOwed) * 100
   const colour = (leftToPay === 0 ) ? 'secondary' : 'primary'
-  // ALL COPIED
 
   return (
     <div>

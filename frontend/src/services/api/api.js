@@ -1,7 +1,7 @@
 import { handleAuthError } from '../auth'
 const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://debtor-api.tomhaines.xyz/api/v1' : 'http://localhost:5000/api/v1' /* eslint no-undef: off*/
 
-var authToken
+var authToken // Initialized empty, set when known
 
 const createHeaders = () => {
   return {

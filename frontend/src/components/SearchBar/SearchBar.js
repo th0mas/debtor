@@ -13,10 +13,12 @@ import Divider from '@material-ui/core/Divider'
 import styles from './styles.scss'
 
 export class SearchBar extends React.Component {
+
   constructor(props) {
     super(props)
     this.state = { anchor: null, searchText: '' }
   }
+
   handleFocus = (event) => {
     this.setState({
       anchor: event.currentTarget
@@ -42,7 +44,7 @@ export class SearchBar extends React.Component {
   handleKey = (event, result) => {
     if (event.keyCode === 13 && result) {
       // Enter has been clicked
-      // double check there is actually a result bc spaghetti TODO: Fix
+      // Double check that there is a valid result
       history.push(`/user/${result.id}`)
       event.target.blur()
     }
@@ -91,7 +93,8 @@ export class SearchBar extends React.Component {
                       return (
                         <div key={item.id}>
                           <Divider />
-                          <ListItem onMouseDown={() => { history.push(`/user/${item.id}`) }} style={{ cursor: 'pointer' }}>
+                          <ListItem onMouseDown={() => { history.push(`/user/${item.id}`) }} 
+                            style={{ cursor: 'pointer' }}>
                             <ListItemText>{item.name}</ListItemText>
                           </ListItem>
                         </div>
