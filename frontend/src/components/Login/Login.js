@@ -54,7 +54,6 @@ export class Login extends React.PureComponent {
                 <Input fullWidth
                   id='email'
                   name='email'
-                  type=''
                   onChange={this.props.updateLoginForm}
                 />
               </FormControl>

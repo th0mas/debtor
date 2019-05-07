@@ -17,19 +17,11 @@ export const SortBySelect = ({ sortBy, setSortBy }) => {
       <Select style={{display: 'flex'}}
         value={sortBy}
         onChange={(event) => setSortBy(event.target.value)}
-        // input={
-        //   <Input
-        //     labelWidth={60}
-        //     name="sort-by"
-        //     id="sort-by"
-        //   />
-        // }
       >
-        <Menuitem value={'time_created'}>Date created</Menuitem>
+        <Menuitem value={'id'}>Date created</Menuitem>
         <Menuitem value={'amount'}>Amount Owed</Menuitem>
-        <Menuitem value={'description'}>Name</Menuitem>
+        <Menuitem value={'name'}>Name</Menuitem>
       </Select>
-      {/*<FormHelperText>Sort By</FormHelperText>*/}
     </FormControl>
   )
 }

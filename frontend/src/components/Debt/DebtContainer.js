@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
+import { goBack } from 'connected-react-router'
 import { Debt } from './Debt'
 
 import { saveDebt } from '../../services/debts'
@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    push: (path) => dispatch(push(path)),
+    goBack: () => dispatch(goBack()),
     saveDebt: (debt) => dispatch(saveDebt(debt)),
     updateDebtState: (newState) => dispatch(updateFormState(updateDebtFormState)(newState))
   }

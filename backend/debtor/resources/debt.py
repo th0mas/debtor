@@ -19,13 +19,22 @@ resource_fields = {
     "paid": fields.Boolean
 }
 
+def limit_str(value):
+    if type(value) != str:
+        return TypeError()
+    
+    if len(value) >= 200:
+        return ValueError('String too long')
+    
+    return value
+
 parser = reqparse.RequestParser()
 parser.add_argument("amount", type=str)
 parser.add_argument("debtor", type=dict)
 parser.add_argument("creditor_id", type=int) # TODO: Fix this in FE
 parser.add_argument("debtor_id", type=int)
 parser.add_argument("creditor", type=dict)
-parser.add_argument('description', type=str)
+parser.add_argument('description', type=limit_str)
 parser.add_argument("paid", type=bool)
 
 

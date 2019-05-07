@@ -18,17 +18,27 @@ export class RecentActivity extends React.PureComponent {
       : this.props.debts.filter(item => item.debtor.id === this.props.user.id && item.paid === false)
     return debts
   }
+  
   getCredits(all = false) {
     let credits = all === true
       ? this.props.debts.filter(item => item.creditor.id === this.props.user.id)
       : this.props.debts.filter(item => item.creditor.id === this.props.user.id && item.paid === false)
     return credits
-
   }
+
   merge = (left, right, attr) => {
     let result = []
     while (left.length && right.length) {
-      if (left[0][attr] >= right[0][attr]){
+
+      let leftAttr = left[0][attr]
+      let rightAttr = right[0][attr]
+
+      if (attr == 'name') {
+        leftAttr = this.props.accounts.find(a => left[0].creditor.id === a.id).name
+        rightAttr = this.props.accounts.find(a => right[0].creditor.id === a.id).name
+      }
+
+      if (leftAttr >= rightAttr ){
         result.push(left.shift())
       } else {
         result.push(right.shift())
@@ -42,7 +52,6 @@ export class RecentActivity extends React.PureComponent {
     if (items.length < 2) {
       return items
     }
-
     let middle = parseInt(items.length / 2)
     let left = items.slice(0, middle)
     let right = items.slice(middle, items.length)
