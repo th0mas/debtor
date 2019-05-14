@@ -28,14 +28,17 @@ class Auth(Resource):
         Requires the `email` and `password` arguments and use these to verify the user and then
         provide them with a login token. - Otherwise returns an error
         """
+        auth_error = {"error": "username or password incorrect"}
         args = parser.parse_args()
-        user = User.query.filter_by(email=args["email"]).first_or_404()
+        user = User.query.filter_by(email=args["email"]).first()
+
+        if not user: 
+            return jsonify(auth_error)
 
         if user.check_password_hash(args["password"]):
             return jsonify({"Authorization": user.create_jwt().decode()})
-
         else:
-            return jsonify({"error": "username or password incorrect"})
+            return jsonify(auth_error)
 
     @login_required    
     def get(self):

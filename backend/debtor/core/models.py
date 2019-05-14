@@ -3,6 +3,7 @@ import os
 import jwt
 from debtor import db, bcrypt, app
 from flask_login import UserMixin
+from flask_restful import abort
 
 
 class User(db.Model, UserMixin):
@@ -157,6 +158,8 @@ class Debt(db.Model):
     paid = db.Column(db.Boolean, default=False)
 
     def __init__(self, amount, description, debtor, creditor):
+        # Check to make sure creditor and debtor are different people
+        if debtor == creditor: abort(400)
         self.amount = amount
         self.description = description
         self.debtor = debtor
